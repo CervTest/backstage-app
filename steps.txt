@@ -1,0 +1,9 @@
+Ran the following to start (with `nodenv` previously installed - other managers are available):
+
+* `nodenv install 20.10.0`
+* `nodenv local 20.10.0` (did not catch Yarn)
+* `nodenv global 20.10.0` (setting it globally was suggested, didn't help either)
+* `npm install -g yarn` (to get Yarn for v20 rather than just existing v16 - but globally hmm)
+* `npx @backstage/create-app@latest` for latest Backstage (in subdir with a given name, move after)
+* `yarn dev` should now work (prior step included the `yarn install`)
+
