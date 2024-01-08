@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: env-jira-stage
+  description: This sub-component represents a Jira environment named Stage
+  links:
+    - url: https://jira-stage.example.com
+      title: Jira Stage
+      icon: dashboard
+spec:
+  type: environment
+  lifecycle: staging
+  owner: devops-tools
+  system: system-track
+  subcomponentOf: tool-jira

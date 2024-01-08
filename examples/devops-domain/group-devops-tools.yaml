@@ -1,0 +1,14 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: devops-tools
+  description: DevOps Tools Team
+spec:
+  type: team
+  profile:
+    displayName: DevOps Tools Team
+    email: devopstools@example.com
+    picture: https://example.com/groups/devopstools.jpeg
+  parent: devops
+  children: []
+  members: [janetool, johntool]

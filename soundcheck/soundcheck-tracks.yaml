@@ -1,0 +1,99 @@
+---
+- id: certified-sky-brand-site
+  name: Certified Sky Brand Site
+  ownerEntityRef: group:default/sky-uk
+  description: >
+    This demo certification track suggests how brand sites may optimize their presence in line with the overall Sky brand
+  documentationURL: https://www.skygroup.sky/logos
+  levels:
+    - ordinal: 1
+      checks:
+        - id: has-readme
+          name: GitHub Readme
+          description: >
+            Your brand site Git repo has a readme
+        - id: style-approved-logo
+          name: Approved Logo
+          description: >
+            Your brand site is using a logo that's been approved by the branding department
+        - id: link-to-related-brands
+          name: Related Brands
+          description: >
+            Your brand site links to other related Sky brands to increase awareness and interconnectiveness
+    - ordinal: 2
+      checks:
+        - id: web-optimized
+          name: Optimized for Web
+          description: >
+            Your site has been run through an optimizer to minify sizes and maximize compatibility for the web
+        - id: cdn-enabled
+          name: CDN enabled
+          description: >
+            Your site's assets have been shared with a CDN provider for speedier loading
+        - id: vulnerability-scanned
+          name: Scanned for vulnerabilities
+          description: >
+            Your site is wired up to automated vulnerability scanning for better security
+    - ordinal: 3
+      checks:
+        - id: mobile-optimized
+          name: Optimized for Mobile
+          description: >
+            Your site has been run through an optimizer to minify sizes and maximize compatibility for mobile devices
+        - id: seo-optimized
+          name: SEO optimized
+          description: >
+            Your site has been run through SEO optimization for better traffic rankings
+        - id: automated-change-control
+          name: Automated Change Control
+          description: >
+            Your site process maturity has been proven to the point to qualify for automated change control
+- id: certified-rockband
+  name: Certified Rockband
+  ownerEntityRef: group:default/blue-man-group
+  description: >
+    Climb this ladder to prove your worth as an outstanding rock band with amazing fans, as per official guidance from the Blue Man Group
+  documentationURL: https://www.backstage.io
+  levels:
+    - ordinal: 1
+      checks:
+        - id: basic-head-bob
+          name: Your audience follows along to the basic head bob
+          description: >
+            Rock Concert Movement Number 1: The basic head bob. Shows beginning engagement from your fans.
+        - id: closer-look-at-audience
+          name: Band checks out super fans up front
+          description: >
+            Rock Concert Movement Number 10: Get a closer look at the audience. Band members have the presence to scoot up closer to the edge of the stage to interact directory with attendees
+        - id: has-readme
+          name: Associated Git repo has a readme
+          description: >
+            Even if you're a rock band you still need to do documentation
+    - ordinal: 2
+      checks:
+        - id: fist-pump
+          name: Your audience gets a good synchronized fist pump going
+          description: >
+            Rock Concert Movement Number 2: The one-armed fist pump. This shows increasing support from your fans
+        - id: two-armed-yell
+          name: Audience yells eagerly with arms raised
+          description: >
+            Rock Concert Movement Number 6: The two armed upward thrust with yell. You're beginning to get more interactivity with your fans.
+        - id: hands-in-the-air
+          name: Audience waves their hands in the air like they just don't care
+          description: >
+            Rock Concert Movement Number 5: Wave your hands in the air like you just don't care. Your fans are going wild and really getting into your art!
+    - ordinal: 3
+      checks:
+        - id: raise-the-roof
+          name: Audience performs synchronized roof raising
+          description: >
+            Rock Concert Movement Number 7: Raise the roof. The audience is trying to blast the roof off your venue!
+        - id: head-leg-stretch
+          name: Audience will twist themselves into pretzels for you
+          description: >
+            Rock Concert Movement Number 4: The behind the head leg stretch. Your fans will try to twist their own anatomy just to show you praise!
+        - id: jungian-journey
+          name: Take the audience through an insightful adventure
+          description: >
+            Rock Concert Movement Number 237:  Taking the audience on a Jungian journey into the collective unconscious by using the shadow as a metaphor for the primal self that gets repressed by the modern persona and also by using an underground setting and labyrinth office design to represent both the depths of the psyche and the dungeon-like isolation of our increasingly mechanistic society which prevents people from finding satisfying work or meaningful connections with others

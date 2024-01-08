@@ -1,0 +1,14 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: tool-jenkins
+  description: This component represents Jenkins the tool
+  links:
+    - url: https://jenkins.example.com
+      title: Jenkins!
+      icon: dashboard
+spec:
+  type: tool
+  lifecycle: production
+  owner: devops-tools
+  system: system-build

@@ -34,8 +34,35 @@ import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
 import { RequirePermission } from '@backstage/plugin-permission-react';
 import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
 
+import { githubAuthApiRef } from '@backstage/core-plugin-api';
+import { SignInProviderConfig, SignInPage } from '@backstage/core-components';
+
+// required types and packages for example below
+import type { IdentityApi } from '@backstage/core-plugin-api';
+import { discoveryApiRef, useApi } from '@backstage/core-plugin-api';
+
+// additional packages/app/src/App.tsx from a create-app deployment
+import { setTokenCookie } from './cookieAuth';
+
 const app = createApp({
   apis,
+  components: {
+    SignInPage: props => {
+      const discoveryApi = useApi(discoveryApiRef);
+      return (
+        <SignInPage
+          {...props}
+          auto
+          providers={['guest', {
+            id: 'github-auth-provider',
+            title: 'GitHub',
+            message: 'Sign in using GitHub',
+            apiRef: githubAuthApiRef,
+            }]}
+        />
+      );
+    },
+  },
   bindRoutes({ bind }) {
     bind(catalogPlugin.externalRoutes, {
       createComponent: scaffolderPlugin.routes.root,
@@ -53,7 +80,16 @@ const app = createApp({
       catalogIndex: catalogPlugin.routes.catalogIndex,
     });
   },
+  featureFlags: [
+  {
+    pluginId: '', // pluginId is required for feature flags in plugins. It can be left blank for a feature flag leveraged in the application.
+    name: 'soundcheck-enabled',
+    description: 'Enables the Soundcheck plugin',
+  },],
 });
+
+import { SoundcheckRoutingPage } from '@spotify/backstage-plugin-soundcheck';
+import { FeatureFlagged } from '@backstage/core-app-api';
 
 const routes = (
   <FlatRoutes>
@@ -93,6 +129,11 @@ const routes = (
     </Route>
     <Route path="/settings" element={<UserSettingsPage />} />
     <Route path="/catalog-graph" element={<CatalogGraphPage />} />
+
+    <FeatureFlagged with="soundcheck-enabled">
+      <Route path="/soundcheck" element={<SoundcheckRoutingPage title="Soundcheck Maturity Stats" />} />
+    </FeatureFlagged>
+
   </FlatRoutes>
 );
 

@@ -1,0 +1,7 @@
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: devops
+  description: The Domain object for the DevOps department
+spec:
+  owner: devops

@@ -5,7 +5,15 @@ import ExtensionIcon from '@material-ui/icons/Extension';
 import MapIcon from '@material-ui/icons/MyLocation';
 import LibraryBooks from '@material-ui/icons/LibraryBooks';
 import CreateComponentIcon from '@material-ui/icons/AddCircleOutline';
-import LogoFull from './LogoFull';
+
+import MyCustomLogoFull from './logo/bluegooey.png';
+
+const LogoFull = () => {
+  return <img src={MyCustomLogoFull} />;
+};
+
+// import LogoFull from './LogoFull';
+
 import LogoIcon from './LogoIcon';
 import {
   Settings as SidebarSettings,
@@ -26,6 +34,8 @@ import {
 } from '@backstage/core-components';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+
+import { FeatureFlagged } from '@backstage/core-app-api';
 
 const useSidebarLogoStyles = makeStyles({
   root: {
@@ -55,6 +65,8 @@ const SidebarLogo = () => {
   );
 };
 
+import DoneAllIcon from '@material-ui/icons/DoneAll';
+
 export const Root = ({ children }: PropsWithChildren<{}>) => (
   <SidebarPage>
     <Sidebar>
@@ -73,6 +85,9 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         <SidebarDivider />
         <SidebarScrollWrapper>
           <SidebarItem icon={MapIcon} to="tech-radar" text="Tech Radar" />
+          <FeatureFlagged with="soundcheck-enabled">
+            <SidebarItem icon={DoneAllIcon} to="soundcheck" text="Soundcheck" />
+          </FeatureFlagged>
         </SidebarScrollWrapper>
       </SidebarGroup>
       <SidebarSpace />

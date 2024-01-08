@@ -23,7 +23,8 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,sharing=locked \
     apt-get update && \
-    apt-get install -y --no-install-recommends libsqlite3-dev
+    apt-get install -y --no-install-recommends libsqlite3-dev python3 build-essential && \
+    yarn config set python /usr/bin/python3
 
 # From here on we use the least-privileged `node` user to run the backend.
 USER node
@@ -47,6 +48,16 @@ RUN --mount=type=cache,target=/home/node/.cache/yarn,sharing=locked,uid=1000,gid
 
 # Then copy the rest of the backend bundle, along with any other files we might want.
 COPY --chown=node:node packages/backend/dist/bundle.tar.gz app-config*.yaml ./
+COPY --chown=node:node soundcheck soundcheck
+COPY --chown=node:node examples examples
 RUN tar xzf bundle.tar.gz && rm bundle.tar.gz
 
-CMD ["node", "packages/backend", "--config", "app-config.yaml", "--config", "app-config.production.yaml"]
+# The entrypoint can be varied for different purposes including environment specific or generic approaches. This is a Prod example
+# app-config.yaml             This is very basic config for easy upgrading from upstream - nothing too specific, mostly good practices
+# app-config.instance.yaml    This contains the bulk of config for all environments for this instance of Backstage
+# app-config.env-prod.yaml    This covers env specific bits for a "Prod" env (making the image env-specific) - TODO: Dynamic pick
+# app-config.extra.yaml       This uses a Helm-based approach instead where the chart makes a config file from a CM (only available in k8s)
+
+CMD ["node", "packages/backend", "--config", "app-config.yaml", "--config", "app-config.instance.yaml", "--config", "app-config.extra.yaml"]
+
+# Note that images built on an M1 Mac or alike may not work in Linux environments including on k8s

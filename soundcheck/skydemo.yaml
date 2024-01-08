@@ -1,0 +1,73 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: a-sky-uk-department
+  links:
+  - url: https://www.sky.com/
+    title: Sky
+    icon: dashboard
+spec:
+  type: team
+  children: []
+  profile:
+    displayName: A Sky UK Department
+    email: email@sky.com
+    picture: https://logos-world.net/wp-content/uploads/2021/02/Sky-Logo-1989-1993.png
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: sky-user
+spec:
+  memberOf: [a-sky-uk-department]
+  profile:
+    displayName: Sky User
+    email: email@sky.com
+    picture: https://logos-world.net/wp-content/uploads/2021/02/Sky-Logo-1993-1995.png
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: sky-brands
+  title: Sky Brand System
+  description: Container for all the skies
+  links:
+  - url: https://www.sky.com
+    title: Sky Home
+    icon: dashboard
+spec:
+  owner: a-sky-uk-department
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: sky-studios
+  description: Sample website to provide an intro to all Sky Studios
+spec:
+  type: website
+  lifecycle: experimental
+  owner: a-sky-uk-department
+  system: sky-brands
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: sky-crime
+  description: Sample website to cover all the crime shows you watch in the dark
+spec:
+  type: website
+  lifecycle: experimental
+  owner: a-sky-uk-department
+  system: sky-brands
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: sky-nature
+  description: Sample website that's just a happy accident of trees and other nature
+spec:
+  type: website
+  lifecycle: experimental
+  owner: a-sky-uk-department
+  system: sky-brands

@@ -25,7 +25,7 @@ import {
   isKind,
   hasCatalogProcessingErrors,
   isOrphan,
-  hasRelationWarnings,
+hasRelationWarnings,
   EntityRelationWarning,
 } from '@backstage/plugin-catalog';
 import {
@@ -57,6 +57,13 @@ import {
 
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
+
+import { FeatureFlagged } from '@backstage/core-app-api';
+
+import {
+  EntitySoundcheckContent,
+  EntitySoundcheckCard,
+} from '@spotify/backstage-plugin-soundcheck';
 
 const techdocsContent = (
   <EntityTechdocsContent>
@@ -137,6 +144,13 @@ const overviewContent = (
     <Grid item md={8} xs={12}>
       <EntityHasSubcomponentsCard variant="gridItem" />
     </Grid>
+
+    <FeatureFlagged with="soundcheck-enabled">
+      <Grid item md={6} xs={12}>
+        <EntitySoundcheckCard />
+      </Grid>
+    </FeatureFlagged>
+
   </Grid>
 );
 
@@ -175,6 +189,12 @@ const serviceEntityPage = (
     <EntityLayout.Route path="/docs" title="Docs">
       {techdocsContent}
     </EntityLayout.Route>
+
+    <FeatureFlagged with="soundcheck-enabled">
+      <EntityLayout.Route path="/soundcheck" title="Soundcheck">
+        <EntitySoundcheckContent />
+      </EntityLayout.Route>
+    </FeatureFlagged>
   </EntityLayout>
 );
 
@@ -202,6 +222,12 @@ const websiteEntityPage = (
     <EntityLayout.Route path="/docs" title="Docs">
       {techdocsContent}
     </EntityLayout.Route>
+
+    <FeatureFlagged with="soundcheck-enabled">
+      <EntityLayout.Route path="/soundcheck" title="Soundcheck">
+        <EntitySoundcheckContent />
+      </EntityLayout.Route>
+    </FeatureFlagged>
   </EntityLayout>
 );
 
@@ -221,6 +247,12 @@ const defaultEntityPage = (
     <EntityLayout.Route path="/docs" title="Docs">
       {techdocsContent}
     </EntityLayout.Route>
+
+    <FeatureFlagged with="soundcheck-enabled">
+      <EntityLayout.Route path="/soundcheck" title="Soundcheck">
+        <EntitySoundcheckContent />
+      </EntityLayout.Route>
+    </FeatureFlagged>
   </EntityLayout>
 );
 
@@ -289,6 +321,8 @@ const userPage = (
   </EntityLayout>
 );
 
+import { GroupSoundcheckContent } from '@spotify/backstage-plugin-soundcheck';
+
 const groupPage = (
   <EntityLayout>
     <EntityLayout.Route path="/" title="Overview">
@@ -303,10 +337,13 @@ const groupPage = (
         <Grid item xs={12} md={6}>
           <EntityMembersListCard />
         </Grid>
-        <Grid item xs={12} md={6}>
+<Grid item xs={12} md={6}>
           <EntityLinksCard />
         </Grid>
       </Grid>
+    </EntityLayout.Route>
+    <EntityLayout.Route path="/soundcheck" title="Soundcheck">
+      <GroupSoundcheckContent />
     </EntityLayout.Route>
   </EntityLayout>
 );

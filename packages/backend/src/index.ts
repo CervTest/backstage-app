@@ -28,9 +28,15 @@ import scaffolder from './plugins/scaffolder';
 import proxy from './plugins/proxy';
 import techdocs from './plugins/techdocs';
 import search from './plugins/search';
+
+import soundcheck from './plugins/soundcheck';
+
 import { PluginEnvironment } from './types';
 import { ServerPermissionClient } from '@backstage/plugin-permission-node';
 import { DefaultIdentityClient } from '@backstage/plugin-auth-node';
+
+import { createAuthMiddleware } from './authMiddleware';
+import cookieParser from 'cookie-parser';
 
 function makeCreateEnv(config: Config) {
   const root = getRootLogger();
@@ -78,6 +84,8 @@ async function main() {
   });
   const createEnv = makeCreateEnv(config);
 
+  const soundcheckEnv = useHotMemoize(module, () => createEnv('soundcheck'));
+
   const catalogEnv = useHotMemoize(module, () => createEnv('catalog'));
   const scaffolderEnv = useHotMemoize(module, () => createEnv('scaffolder'));
   const authEnv = useHotMemoize(module, () => createEnv('auth'));
@@ -86,15 +94,29 @@ async function main() {
   const searchEnv = useHotMemoize(module, () => createEnv('search'));
   const appEnv = useHotMemoize(module, () => createEnv('app'));
 
+  const authMiddleware = await createAuthMiddleware(config, appEnv);
+
   const apiRouter = Router();
+  apiRouter.use(cookieParser());
+  // The auth route must be publicly available as it is used during login
+  apiRouter.use('/auth', await auth(authEnv));
+  // Add a simple endpoint to be used when setting a token cookie
+  apiRouter.use('/cookie', authMiddleware, (_req, res) => {
+    res.status(200).send(`Coming right up`);
+  });
+  // Only authenticated requests are allowed to some  routes below
   apiRouter.use('/catalog', await catalog(catalogEnv));
   apiRouter.use('/scaffolder', await scaffolder(scaffolderEnv));
+  apiRouter.use('/scaffolder', authMiddleware, await scaffolder(scaffolderEnv));
   apiRouter.use('/auth', await auth(authEnv));
   apiRouter.use('/techdocs', await techdocs(techdocsEnv));
   apiRouter.use('/proxy', await proxy(proxyEnv));
   apiRouter.use('/search', await search(searchEnv));
 
+  apiRouter.use('/soundcheck', await soundcheck(soundcheckEnv));
+
   // Add backends ABOVE this line; this 404 handler is the catch-all fallback
+  apiRouter.use(authMiddleware, notFoundHandler());
   apiRouter.use(notFoundHandler());
 
   const service = createServiceBuilder(module)

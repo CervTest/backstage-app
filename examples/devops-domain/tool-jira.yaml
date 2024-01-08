@@ -1,0 +1,14 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: tool-jira
+  description: This component represents Jira
+  links:
+    - url: https://jira.example.com
+      title: Jira!
+      icon: dashboard
+spec:
+  type: tool
+  lifecycle: production
+  owner: devops-ops
+  system: system-track

@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: devops-ops
+  description: DevOps Operations Team
+spec:
+  # TODO: Is this really more of a virtual team? Spun up as a fragment of a "real" (HR-based) team to be a container of specific things?
+  type: team
+  profile:
+    displayName: DevOps Operations Team
+    email: devops@example.com
+    picture: https://example.com/groups/devops.jpeg
+  parent: devops
+  children: []
+  members: [janeops, johnops]

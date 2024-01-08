@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: tenant-jira-abc
+  description: This component represents a Jira project named ABC
+  links:
+    - url: https://jira.example.com/abc
+      title: Jira ABC project
+      icon: dashboard
+spec:
+  type: tenant
+  lifecycle: production
+  owner: devops-ops
+  system: system-track
+  subcomponentOf: tool-jira

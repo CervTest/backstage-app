@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: process-user-admin
+  description: This component represents a process performed by a team in a tool, namely general administration of users within the tool.
+spec:
+  type: process
+  lifecycle: production
+  owner: devops-ops
+  system: devops-track
+  subcomponentOf: tool-jira

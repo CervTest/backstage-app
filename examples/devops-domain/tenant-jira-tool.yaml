@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: tenant-jira-tool
+  description: This component represents a Jira project named TOOL
+  links:
+    - url: https://jira.example.com/tool
+      title: Jira TOOL project
+      icon: dashboard
+spec:
+  type: tenant
+  lifecycle: production
+  owner: devops-tools
+  system: system-track
+  subcomponentOf: tool-jira

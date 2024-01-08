@@ -1,0 +1,4 @@
+# This template/config file is meant for overall instance-specific config, at medium priority
+# Both variants of the file are kept in Git, but only the template should flow upstream with new useful instance-level bits
+organization:
+  name: Instance Template Org

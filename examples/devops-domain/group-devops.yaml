@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: devops
+  description: DevOps Department
+spec:
+  type: business-unit
+  profile:
+    displayName: DevOps Department
+    email: devops@example.com
+    picture: https://example.com/groups/devops.jpeg
+  children: [devops-ops, devops-tools]
+  members: [boss]

@@ -1,0 +1,8 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: system-build
+  description: The System object for DevOps builds tools
+spec:
+  owner: devops-tools
+  domain: devops

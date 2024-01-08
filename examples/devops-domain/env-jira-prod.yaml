@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: env-jira-prod
+  description: This sub-component represents a Jira environment named Production
+  links:
+    - url: https://jira.example.com
+      title: Jira Production
+      icon: dashboard
+spec:
+  type: environment
+  lifecycle: production
+  owner: devops-tools
+  system: system-track
+  subcomponentOf: tool-jira

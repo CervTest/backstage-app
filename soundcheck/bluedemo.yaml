@@ -1,0 +1,73 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: blue-man-group
+  links:
+  - url: https://www.blueman.com
+    title: Blue Man Group Home
+    icon: dashboard
+spec:
+  type: team
+  children: []
+  profile:
+    displayName: Blue Man Group
+    email: email@blueman.com
+    picture: https://upload.wikimedia.org/wikipedia/commons/8/87/Blue_Man4_%28SP%29_2009_Brazil.JPG
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: blue-man
+spec:
+  memberOf: [blue-man-group]
+  profile:
+    displayName: Blue Man
+    email: email@blueman.com
+    picture: https://www.blueman.com/-/media/bmg/images/about/homepage_box.png
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: blue-man-bands
+  title: Blue Man Bands
+  description: Container for all the blue!
+  links:
+  - url: https://www.blueman.com
+    title: Blue Man Group Home
+    icon: dashboard
+spec:
+  owner: blue-man-group
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: pvc-tube-tuners
+  description: Tune ALL the PVC tubes!
+spec:
+  type: website
+  lifecycle: experimental
+  owner: blue-man-group
+  system: blue-man-bands
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: rainbow-drums
+  description: The colors, man, the colors!
+spec:
+  type: website
+  lifecycle: experimental
+  owner: blue-man-group
+  system: blue-man-bands
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: cereal-munchers
+  description: NOM CRUNCH NOM CRUNCH NOM CRUNCH
+spec:
+  type: website
+  lifecycle: experimental
+  owner: blue-man-group
+  system: blue-man-bands
