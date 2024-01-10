@@ -1,0 +1,39 @@
+# Just a unique token that could be useful, such as for backend access (created via `yarn setup` initializing this template)
+BACKEND_SECRET={TOKEN}
+
+# To support login via Okta
+OKTA_CLIENT_ID=
+OKTA_CLIENT_SECRET=
+
+# To support integrations such as the `publish:bitbucket` action, you'll need to supply Bitbucket credentials...
+# Your Bitbucket username, NOT your email. You can find your username here: https://bitbucket.org/account/settings/
+BITBUCKET_USERNAME=
+
+# An app password generated for your user above.
+# Visit: https://bitbucket.org/account/settings/app-passwords - generate and paste a new app password here.
+# TODO: required scopes
+BITBUCKET_PASSWORD=
+
+# A personal API token for GitLab, to support integrations such as the `publish:gitlab` action.
+# Visit: https://gitlab.adaptavist.com/-/profile/personal_access_tokens - generate and paste the new token here.
+# TODO: required scopes
+GITLAB_TOKEN=
+
+# A personal API token for GitHub, to support integrations such as the `publish:github` action.
+# Visit: https://github.com/settings/tokens - generate and paste the new token here.
+# TODO: required scopes
+GITHUB_TOKEN=
+
+# Auth via GitHub - see https://backstage.io/docs/auth/github/provider
+GITHUB_AUTH_CLIENT_ID=
+GITHUB_AUTH_CLIENT_SECRET=
+
+# (optional) The Authorization token for the bitbucket proxy. This is required for the custom bitbucket plugin,
+# not for bitbucket actions. It is a base64 encoding of <username>:<password> as passed in the Authorization header.
+BITBUCKET_API_TOKEN=
+
+# (optional) Used for sending analytics data to Segment
+SEGMENT_WRITE_KEY=
+
+# Debugging log level (set to `debug` to enable verbose debugging output)
+LOG_LEVEL=

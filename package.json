@@ -6,7 +6,8 @@
     "node": "18 || 20"
   },
   "scripts": {
-    "dev": "concurrently \"yarn start\" \"yarn start-backend\"",
+    "setup": "set -C; sed -E \"s/\\{TOKEN\\}/$(yarn -s token)/\" env-template > .env; cp -vn app-config.local-template.yaml app-config.local.yaml; exit 0",
+    "dev": "set -a; source .env; concurrently \"yarn start\" \"yarn start-backend\"",
     "start": "yarn workspace app start",
     "start-backend": "yarn workspace backend start",
     "build:backend": "yarn workspace backend build",
@@ -22,7 +23,8 @@
     "lint": "backstage-cli repo lint --since origin/main",
     "lint:all": "backstage-cli repo lint",
     "prettier:check": "prettier --check .",
-    "new": "backstage-cli new --scope internal"
+    "new": "backstage-cli new --scope internal",
+    "token": "node -p 'require(\"crypto\").randomBytes(24).toString(\"base64url\")'"
   },
   "workspaces": {
     "packages": [
