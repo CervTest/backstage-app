@@ -2979,6 +2979,57 @@
     luxon "^3.0.0"
     react-use "^17.2.4"
 
+"@backstage/plugin-jenkins-backend@^0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@backstage/plugin-jenkins-backend/-/plugin-jenkins-backend-0.3.2.tgz#6deddd597b90469e1a394eb13e18d3169066fcdb"
+  integrity sha512-coe2OGCOCoEuNmOf+6YjKzWs/PuICz5SimMnSgY5fS5SdZD30yq4PYmvtdeQJ/0tb/+ZZtOxITHvEKSZ7asDeQ==
+  dependencies:
+    "@backstage/backend-common" "^0.20.0"
+    "@backstage/backend-plugin-api" "^0.6.8"
+    "@backstage/catalog-client" "^1.5.0"
+    "@backstage/catalog-model" "^1.4.3"
+    "@backstage/config" "^1.1.1"
+    "@backstage/errors" "^1.2.3"
+    "@backstage/plugin-auth-node" "^0.4.2"
+    "@backstage/plugin-catalog-node" "^1.6.0"
+    "@backstage/plugin-jenkins-common" "^0.1.22"
+    "@backstage/plugin-permission-common" "^0.7.11"
+    "@backstage/plugin-permission-node" "^0.7.19"
+    "@types/express" "^4.17.6"
+    express "^4.17.1"
+    express-promise-router "^4.1.0"
+    jenkins "^1.0.0"
+    node-fetch "^2.6.7"
+    winston "^3.2.1"
+    yn "^4.0.0"
+
+"@backstage/plugin-jenkins-common@^0.1.22":
+  version "0.1.22"
+  resolved "https://registry.yarnpkg.com/@backstage/plugin-jenkins-common/-/plugin-jenkins-common-0.1.22.tgz#d1ed555a5f64299b7bfa8090d6e7006774327094"
+  integrity sha512-gNrXNC4h8gbjeoXDAI/chFgEF6mu210NFy8jjjooBgL3HjLgeslsSKvnLDVXKkb7wxn4g+ODyz3Bhqbb1A6OFA==
+  dependencies:
+    "@backstage/plugin-catalog-common" "^1.0.19"
+    "@backstage/plugin-permission-common" "^0.7.11"
+
+"@backstage/plugin-jenkins@^0.9.3":
+  version "0.9.3"
+  resolved "https://registry.yarnpkg.com/@backstage/plugin-jenkins/-/plugin-jenkins-0.9.3.tgz#85f7ceda6a4997ff0f97aa5fd0608dff35265945"
+  integrity sha512-+CVy4Brtn4V2G+3abg8SR6eMoTgPbQdKjL7g86HK5uwNiiq839wJyB6KpWdnyITNOlUv+SGSqqbbUZWZGeEYmw==
+  dependencies:
+    "@backstage/catalog-model" "^1.4.3"
+    "@backstage/core-components" "^0.13.9"
+    "@backstage/core-plugin-api" "^1.8.1"
+    "@backstage/errors" "^1.2.3"
+    "@backstage/plugin-catalog-react" "^1.9.2"
+    "@backstage/plugin-jenkins-common" "^0.1.22"
+    "@backstage/theme" "^0.5.0"
+    "@material-ui/core" "^4.12.2"
+    "@material-ui/icons" "^4.9.1"
+    "@material-ui/lab" "4.0.0-alpha.61"
+    "@types/react" "^16.13.1 || ^17.0.0"
+    luxon "^3.0.0"
+    react-use "^17.2.4"
+
 "@backstage/plugin-org@^0.6.18":
   version "0.6.18"
   resolved "https://registry.yarnpkg.com/@backstage/plugin-org/-/plugin-org-0.6.18.tgz#dfd752d439d60e861f0e04e1b4fad071e6f29d0b"
@@ -8217,7 +8268,7 @@
   resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.7.tgz#50ae4353eaaddc04044279812f52c8c65857dbcb"
   integrity sha512-hKormJbkJqzQGhziax5PItDUTMAM9uE2XXQmM37dyd4hVM+5aVl7oVxMVUiVQn2oCQFN/LKCZdvSM0pFRqbSmQ==
 
-"@types/react-dom@*", "@types/react-dom@<18.0.0", "@types/react-dom@^17":
+"@types/react-dom@*", "@types/react-dom@<18.0.0":
   version "17.0.25"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.25.tgz#e0e5b3571e1069625b3a3da2b279379aa33a0cb5"
   integrity sha512-urx7A7UxkZQmThYA4So0NelOVjx3V4rNFVJwp0WZlbIK5eM4rNJDiN3R/E9ix0MBh6kAEojk/9YL+Te6D9zHNA==
@@ -9048,6 +9099,7 @@ anymatch@^3.0.3, anymatch@~3.1.2:
     "@backstage/plugin-catalog-import" "^0.10.4"
     "@backstage/plugin-catalog-react" "^1.9.2"
     "@backstage/plugin-github-actions" "^0.6.9"
+    "@backstage/plugin-jenkins" "^0.9.3"
     "@backstage/plugin-org" "^0.6.18"
     "@backstage/plugin-permission-react" "^0.4.18"
     "@backstage/plugin-scaffolder" "^1.17.0"
@@ -14849,6 +14901,13 @@ jake@^10.8.5:
     filelist "^1.0.4"
     minimatch "^3.1.2"
 
+jenkins@^1.0.0:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/jenkins/-/jenkins-1.0.2.tgz#0cc14786e33d330695cf5b1ac9bd8ad13b01116e"
+  integrity sha512-HdgNvNxaW4frxwZcQvhC03xNZQFonugpHfNb8FNw4T0B7M9txzsOWNk6rHapA9NxDwBeJ0wiHINlUFQBaVBJ+g==
+  dependencies:
+    papi "^1.1.0"
+
 jest-changed-files@^29.7.0:
   version "29.7.0"
   resolved "https://registry.yarnpkg.com/jest-changed-files/-/jest-changed-files-29.7.0.tgz#1c06d07e77c78e1585d020424dedc10d6e17ac3a"
@@ -18207,6 +18266,11 @@ pako@^1.0.10, pako@~1.0.2, pako@~1.0.5:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.11.tgz#6c9599d340d54dfd3946380252a35705a6b992bf"
   integrity sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==
+
+papi@^1.1.0:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/papi/-/papi-1.1.2.tgz#5b1d7686834bec489f1f823103c5e8554f2b984f"
+  integrity sha512-cwM6pPpfAYgPe3EQi23SmB5J5s4XFS9lou9z63I5BbnMGmFaR8LAKvKboW7n1IUAKj76OtnyK0YU16JjnZrqVg==
 
 param-case@^3.0.4:
   version "3.0.4"

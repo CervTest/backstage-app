@@ -51,3 +51,30 @@ While working locally with this approach it is important to keep your config fil
 To validate your plugin after following the instructions run `yarn install` then `yarn tsc` and consider adjusting the locally included `catalog-info.yaml` with an appropriate annotation to test. You might also want to minimize extra tweaks to whitespace and the like to leave a clearer overview and make it easier to merge plugin branches around without causing excessive conflicts (make such edits in the relevant base branch instead)
 
 For managing secrets on the GitHub/Jenkins/GCP setup make the associated credential in Jenkins and then reference it in the `backstage-infra` repo. In there the `Jenkinsfile` will load the credential, write it into a Kubernetes secrets file locally, which is then deployed to k8s and loaded by Backstage as extra environment variables you can then simply reach normally in config. Note that there is also an additional extra override config file in the infra repo, much like the local config file when working in a developer workspace.
+
+### Jenkins (new)
+
+Unlike the older version of the Jenkins plugin the new approach targeting new architecture is split into two:
+
+* https://github.com/backstage/backstage/tree/master/plugins/jenkins - front-end plugin
+* https://github.com/backstage/backstage/tree/master/plugins/jenkins-backend - back-end, naturally
+
+Full instructions via links, abbreviated instructions follow
+
+#### Front-end
+
+* `yarn add --cwd packages/app @backstage/plugin-jenkins` (from the root dir, unlike app dir with old plugin)
+* Adjust `EntityPage.tsx` as instructed - although some personal preference on where to place and what to keep might be involved here (the `{overviewContent}` type blocks might need to get moved around a bit and/or copied)
+* Add the Jenkins annotation to a given catalog item, for instance `jenkins.io/job-full-name: 'Experimental/CervTest/jibby'`
+* Optionally tweak at the columns included as noted in the docs
+
+#### Back-end
+
+* The instructions mentions support for the new backend system, but that may take extra config elsewhere first so probably best to skip, for now
+* `yarn add --cwd packages/backend @backstage/plugin-jenkins-backend` (again from the root dir)
+* Create the `jenkins.ts` file under `packages/backend/src/plugins`
+* Adjust `packages/backend/src/index.ts` slightly
+* Add a Jenkins section in config (get API key from a Jenkins user account then base64 encode it)
+* Add an annotation on a catalog item to pair with a job path in Jenkins
+* Multiple instances or custom JenkinsInfoProvider is out of scope for this test setup (not needed)
+
