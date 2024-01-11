@@ -58,6 +58,12 @@ import {
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
 
+import {
+  EntityJenkinsContent,
+  EntityLatestJenkinsRunCard,
+  isJenkinsAvailable,
+} from '@backstage/plugin-jenkins';
+
 const techdocsContent = (
   <EntityTechdocsContent>
     <TechDocsAddons>
@@ -143,11 +149,29 @@ const overviewContent = (
 const serviceEntityPage = (
   <EntityLayout>
     <EntityLayout.Route path="/" title="Overview">
-      {overviewContent}
+      <EntitySwitch>
+        <EntitySwitch.Case if={isJenkinsAvailable}>
+          <Grid item sm={6}>
+            {overviewContent}
+            <EntityLatestJenkinsRunCard
+              branch="main,master"
+              variant="gridItem"
+            />
+          </Grid>
+        </EntitySwitch.Case>
+        {overviewContent}
+      </EntitySwitch>
+
     </EntityLayout.Route>
 
     <EntityLayout.Route path="/ci-cd" title="CI/CD">
-      {cicdContent}
+      <EntitySwitch>
+        <EntitySwitch.Case if={isJenkinsAvailable}>
+          <EntityJenkinsContent />
+          {cicdContent}
+        </EntitySwitch.Case>
+        {cicdContent}
+      </EntitySwitch>
     </EntityLayout.Route>
 
     <EntityLayout.Route path="/api" title="API">

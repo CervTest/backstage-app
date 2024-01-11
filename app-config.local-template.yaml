@@ -6,6 +6,11 @@ organization:
   # This would override the same config option set in the client file, comment to let it win
   name: Adaptavist Dev
 
+jenkins:
+  baseUrl: https://jenkins.terasology.io
+  username: GooeyHub
+  apiKey: ${JENKINS_API_TOKEN}
+
 # Note that having this section in the local config file will block any other config file to contribute catalog items
 catalog:
   import:
