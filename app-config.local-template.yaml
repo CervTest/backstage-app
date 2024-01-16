@@ -8,7 +8,7 @@ organization:
 
 jenkins:
   baseUrl: https://jenkins.terasology.io
-  username: GooeyHub
+  username: cervator
   apiKey: ${JENKINS_API_TOKEN}
 
 # Note that having this section in the local config file will block any other config file to contribute catalog items
@@ -17,7 +17,7 @@ catalog:
     entityFilename: catalog-info.yaml
     pullRequestBranchName: backstage-integration
   rules:
-    - allow: [Component, System, API, Resource, Location]
+    - allow: [Component, System, API, Resource, Location, User, Group, Domain, Template]
   locations:
     # Local example data, file locations are relative to the backend process, typically `packages/backend`
     - type: file
@@ -26,11 +26,11 @@ catalog:
     # Local example template
     - type: file
       target: ../../examples/template/template.yaml
-      rules:
-        - allow: [Template]
 
     # Local example organizational data
     - type: file
       target: ../../examples/org.yaml
-      rules:
-        - allow: [User, Group]
+
+    # Example but legit home made component
+    - type: url
+      target: https://github.com/CervTest/jibby/blob/main/catalog-info.yaml

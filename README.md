@@ -34,11 +34,14 @@ Unlike the older version of the Jenkins plugin the new approach targeting new ar
 
 Full instructions via links, abbreviated instructions follow
 
+Note that this example only applies the Jenkins extras to entities of type _service_ - you wouldn't see anything different on a type _website_ for instance. It is left as an exercise to the reader where to enable what.
+
 #### Front-end
 
 * `yarn add --cwd packages/app @backstage/plugin-jenkins` (from the root dir, unlike app dir with old plugin)
-* Adjust `EntityPage.tsx` as instructed - although some personal preference on where to place and what to keep might be involved here (the `{overviewContent}` type blocks might need to get moved around a bit and/or copied)
-* Add the Jenkins annotation to a given catalog item, for instance `jenkins.io/job-full-name: 'Experimental/CervTest/jibby'`
+* Adjust `EntityPage.tsx` as instructed - although some personal preference on where to place and what to keep might be involved here (like the `{overviewContent}` type blocks might need to get moved around a bit and/or copied, conditional blocks may be warranted)
+  * Note additionally that the entity card meant for the overview is branch-targeted - adjust naming to your conventions (the `EntityLatestJenkinsRunCard`)
+* Add the Jenkins annotation to a given catalog item, for instance `jenkins.io/job-full-name: Experimental/CervTest/jibby`
 * Optionally tweak at the columns included as noted in the docs
 
 #### Back-end
@@ -51,3 +54,17 @@ Full instructions via links, abbreviated instructions follow
 * Add an annotation on a catalog item to pair with a job path in Jenkins
 * Multiple instances or custom JenkinsInfoProvider is out of scope for this test setup (not needed)
 
+#### Jenkins API access
+
+This turned out to be the trickiest part. A user token is needed to access the API, which can be generated on the user's profile page in Jenkins under "configure" - however, exact configuration details may be finicky about whether or not that user has the right permissions to use the API, even if they're fine working in the web UI.
+
+Additionally the API key should _not_ be base64 encoded despite older instructions.
+
+Can test with something like the following: 
+
+`curl -u cervator:<api key> https://jenkins.terasology.io/job/CervTest/api/json`
+
+A bad setup will result in 401 errors, while a valid user with incorrect permissions may hit 403 errors instead, with `cervator is missing the Overall/Read permission` buried somewhere in the returned HTML.
+
+Turns out that despite a user actually being "Cervator" on GitHub with Jenkins configured with the GitHub Auth plugin, and being able to be granted admin rights in the web UI just fine as "Cervator" if using the API apparently the user _must_ be granted permissions in all lowercase, and likewise used in lower case on the API calls. Who knew?
+ 
