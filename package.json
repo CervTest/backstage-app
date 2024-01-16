@@ -7,6 +7,7 @@
   },
   "scripts": {
     "setup": "set -C; sed -E \"s/\\{TOKEN\\}/$(yarn -s token)/\" env-template > .env; cp -vn app-config.local-template.yaml app-config.local.yaml; exit 0",
+    "minisetup": "set -C;  cp -vn env-template .env; cp -vn app-config.local-template.yaml app-config.local.yaml; exit 0",
     "dev": "set -a; source .env; concurrently \"yarn start\" \"yarn start-backend\"",
     "start": "yarn workspace app start",
     "start-backend": "yarn workspace backend start",
