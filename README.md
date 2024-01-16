@@ -61,7 +61,7 @@ Unlike the older version of the Jenkins plugin the new approach targeting new ar
 
 Full instructions via links, abbreviated instructions follow
 
-Note that this example only applies the Jenkins extras to entities of type _service_ - you wouldn't see anything different on a type _website_ for instance. It is left as an exercise to the reader where to enable what.
+Note that this example only applies the Jenkins extras to entities of type _service_ - you wouldn't see anything different on a type _website_ for instance, and out of box a type like "library" doesn't even match a custom page type and will use the default in `EntityPage.tsx`. It is left as an exercise to the reader where to enable what.
 
 #### Front-end
 

@@ -1,13 +1,11 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: backstage
-  description: An example of a Backstage application.
-  # Example for optional annotations
-  # annotations:
-  #   github.com/project-slug: backstage/backstage
-  #   backstage.io/techdocs-ref: dir:.
+  name: jibby-jenkinsized
+  description: An example of a generated application from a template that's wired up to an integration.
+  annotations:
+    jenkins.io/job-full-name: Experimental/CervTest/jibby
 spec:
-  type: website
+  type: service
   owner: john@example.com
   lifecycle: experimental
