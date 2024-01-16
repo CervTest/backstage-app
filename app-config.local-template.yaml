@@ -8,7 +8,7 @@ organization:
 
 jenkins:
   baseUrl: https://jenkins.terasology.io
-  username: GooeyHub
+  username: cervator
   apiKey: ${JENKINS_API_TOKEN}
 
 # Note that having this section in the local config file will block any other config file to contribute catalog items
@@ -34,3 +34,7 @@ catalog:
     # Dummy catalog file to readily edit locally
     - type: file
       target: ../../catalog-info.yaml
+
+    # Example but legit home made component
+    - type: url
+      target: https://github.com/CervTest/jibby/blob/main/catalog-info.yaml

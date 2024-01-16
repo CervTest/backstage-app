@@ -151,7 +151,7 @@ const serviceEntityPage = (
     <EntityLayout.Route path="/" title="Overview">
       <EntitySwitch>
         <EntitySwitch.Case if={isJenkinsAvailable}>
-          <Grid item sm={6}>
+          <Grid>
             {overviewContent}
             <EntityLatestJenkinsRunCard
               branch="main,master"
@@ -159,7 +159,11 @@ const serviceEntityPage = (
             />
           </Grid>
         </EntitySwitch.Case>
-        {overviewContent}
+        <EntitySwitch.Case>
+          <Grid>
+            {overviewContent}
+          </Grid>
+        </EntitySwitch.Case>
       </EntitySwitch>
 
     </EntityLayout.Route>
@@ -168,9 +172,7 @@ const serviceEntityPage = (
       <EntitySwitch>
         <EntitySwitch.Case if={isJenkinsAvailable}>
           <EntityJenkinsContent />
-          {cicdContent}
         </EntitySwitch.Case>
-        {cicdContent}
       </EntitySwitch>
     </EntityLayout.Route>
 
