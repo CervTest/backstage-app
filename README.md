@@ -1,6 +1,6 @@
 # [Backstage](https://backstage.io)
 
-This is your newly scaffolded Backstage App, Good Luck!
+To run locally you need a Node version 18 or 20 available with `yarn` installed. Typically you'd use a utility like `nvm` or `nodenv` to install Node, set that version active, then use NPM to install `yarn`
 
 To start the app, run:
 
@@ -13,6 +13,7 @@ yarn dev
 ## A few technical details
 
 * The `yarn setup` step has been added for a bit of developer utility, including shipped templates for `.env` and the `app-config.local.yaml` file Backstage looks for automatically on local-only execution
+  * Note: This seems to still have OS-specific trouble at times. The extras can be torn out of `package.json` with the user just copying the two files manually. The token part is not in use yet.
 * The `packages/backend/Dockerfile` remains unmodified as of this writing and works - optimization in a multi-layered build can come later. It starts in `/app` meaning links to local catalog files need to look there, not in `../..` as is done when running from source
   * Instructions for building Docker are available within the Dockerfile
 * The included `Jenkinsfile` can successfully build and publish the Docker image when paired with a compatible Jenkins setup (targets Google Container Registry, easy to change)
@@ -34,7 +35,7 @@ Unlike the older version of the Jenkins plugin the new approach targeting new ar
 
 Full instructions via links, abbreviated instructions follow
 
-Note that this example only applies the Jenkins extras to entities of type _service_ - you wouldn't see anything different on a type _website_ for instance. It is left as an exercise to the reader where to enable what.
+Note that this example only applies the Jenkins extras to entities of type _service_ - you wouldn't see anything different on a type _website_ for instance, and out of box a type like "library" doesn't even match a custom page type and will use the default in `EntityPage.tsx`. It is left as an exercise to the reader where to enable what.
 
 #### Front-end
 

@@ -31,6 +31,10 @@ catalog:
     - type: file
       target: ../../examples/org.yaml
 
+    # Dummy catalog file to readily edit locally
+    - type: file
+      target: ../../catalog-info.yaml
+
     # Example but legit home made component
     - type: url
       target: https://github.com/CervTest/jibby/blob/main/catalog-info.yaml
