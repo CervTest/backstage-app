@@ -6,6 +6,10 @@ organization:
   # This would override the same config option set in the client file, comment to let it win
   name: Adaptavist Dev
 
+sonarqube:
+  baseUrl: https://sonarqube.terasology.io
+  apiKey: ${SONAR_TOKEN}
+
 # Note that having this section in the local config file will block any other config file to contribute catalog items
 catalog:
   import:

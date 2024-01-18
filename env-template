@@ -37,3 +37,6 @@ SEGMENT_WRITE_KEY=
 
 # Debugging log level (set to `debug` to enable verbose debugging output)
 LOG_LEVEL=
+
+# Sonarqube API token
+SONAR_TOKEN=

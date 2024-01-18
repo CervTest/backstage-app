@@ -26,3 +26,32 @@ yarn dev
 For Backstage plugins have traditionally been applied directly to source code, while also relying on a Node dependency. As such it has been tricky to "install" a bunch of plugins quickly, as each takes modifying source files, often overlapping. One approach to at least _seeing_ how individual plugins work is making a new branch off `basic` then solely installing a single plugin there. Later instance branches (like `main`) that correspond to a given Backstage can be merged into from various plugin branches with any conflicts resolved then.
 
 While working locally with this approach it is important to keep your config files and .gitignored files in mind, lest you end up with a plugin and a half if for instance `app-config.local.yaml` has not been deleted. The `.env` file will also not overwrite when running `yarn setup` again, but then generally won't cause trouble from having more new variables added than needed.
+
+### Sonar
+
+This plugin supports either [Sonarqube](https://www.sonarsource.com/products/sonarqube/) (self-managed) and [SonarCloud](https://www.sonarsource.com/products/sonarcloud/)
+
+It has both front-end and back-end plugins, commands need to run from the root directory of a Backstage workspace.
+
+#### Front-end
+
+https://github.com/backstage/backstage/blob/master/plugins/sonarqube/README.md
+
+* `yarn add --cwd packages/app @backstage/plugin-sonarqube`
+* Add a card to `EntityPage.tsx` as per instructions
+* Add an annotation to relevant entities like so: `sonarqube.org/project-key: YOUR_PROJECT_KEY`
+* Yarn install, tsc, and test with some entity (after back-end is also ready)
+
+Note that this example adds the Code Quality card to _every_ entity regardless of whether the Sonarqube annotation is present or if the project exists. A better conditional approach is warranted but is at present outside the scope of this sample implementation.
+
+#### Back-end
+
+For simplicity still not using the new backend system instructions
+
+https://github.com/backstage/backstage/blob/master/plugins/sonarqube-backend/README.md
+
+* `yarn add --cwd packages/backend @backstage/plugin-sonarqube-backend`
+* Add `packages/backend/src/plugins/sonarqube.ts` with text provided
+* Adjust `packages/backend/src/index.ts` as per instructions
+* Add a `sonarqube` block to config
+  * Note that the API token needs a certain level of access, a user token from an admin user was enough. You can test a token while bypassing Backstage with: `curl -X GET -H "Authorization: Bearer <api token>" "https://<sonar host>/api/projects/search?projects=<project key>"`
