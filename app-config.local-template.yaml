@@ -21,9 +21,11 @@ catalog:
     # Local example template
     - type: file
       target: ../../examples/template/template.yaml
-      rules:
 
     # Local example organizational data
     - type: file
       target: ../../examples/org.yaml
-      rules:
+
+    # Dummy catalog file to readily edit locally
+    - type: file
+      target: ../../catalog-info.yaml
