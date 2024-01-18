@@ -26,3 +26,42 @@ yarn dev
 For Backstage plugins have traditionally been applied directly to source code, while also relying on a Node dependency. As such it has been tricky to "install" a bunch of plugins quickly, as each takes modifying source files, often overlapping. One approach to at least _seeing_ how individual plugins work is making a new branch off `basic` then solely installing a single plugin there. Later instance branches (like `main`) that correspond to a given Backstage can be merged into from various plugin branches with any conflicts resolved then.
 
 While working locally with this approach it is important to keep your config files and .gitignored files in mind, lest you end up with a plugin and a half if for instance `app-config.local.yaml` has not been deleted. The `.env` file will also not overwrite when running `yarn setup` again, but then generally won't cause trouble from having more new variables added than needed.
+
+### GitLab
+
+Find the Gitlab plugin at this link:
+
+  * https://github.com/immobiliare/backstage-plugin-gitlab - front and back end
+
+Full instructions are at the link, but are written assuming the reader has some level of expertise in Backstage plugin installation and/or Node development, so specific instructions follow.
+
+If you desire more information beyond the installation basics, then see the link to the plugin.
+
+#### GitLab Plugin Installation
+
+##### Install Plugin
+
+In the Backstage root directory, run:
+
+```
+yarn --cwd packages/app add @immobiliarelabs/backstage-plugin-gitlab
+yarn --cwd packages/backend add @immobiliarelabs/backstage-plugin-gitlab-backend
+```
+
+##### Editing Config Files
+
+The configuration files can be arranged differently based on user preference and/or use case. This largely affects positioning on the screen when the page is rendered in the browser. Therefore, this section will simply refer you to the edited configuration files, and within them, locate the lines that have been bracketed with the comment "Gitlab plugin".
+
+The following configuration files were edited or created:
+
+  * packages/app/src/components/catalog/EntityPage.tsx
+    * Note that I added the plugin section to both the overview and website sections.
+  * app-config.yaml
+    * Just for the Gitlab integration, which may already be there.
+  * packages/backend/src/plugins/catalog.ts
+  * packages/backend/src/plugins/gitlab.ts
+  * packages/backend/src/index.ts
+
+##### The New Backend System
+
+Not currently in use.

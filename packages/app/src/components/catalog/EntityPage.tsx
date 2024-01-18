@@ -58,6 +58,7 @@ import {
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
 
+// Gitlab plugin
 import {
     isGitlabAvailable,
     EntityGitlabContent,
@@ -69,6 +70,7 @@ import {
     EntityGitlabReadmeCard,
     EntityGitlabReleasesCard,
 } from '@immobiliarelabs/backstage-plugin-gitlab';
+// Gitlab plugin
 
 const techdocsContent = (
   <EntityTechdocsContent>
@@ -148,7 +150,7 @@ const overviewContent = (
     <Grid item md={8} xs={12}>
       <EntityHasSubcomponentsCard variant="gridItem" />
     </Grid>
-    # Gitlab plugin
+    // Gitlab plugin
     <Grid container spacing={3} alignItems="stretch">
       <EntitySwitch>
         <EntitySwitch.Case if={isGitlabAvailable}>
@@ -176,13 +178,14 @@ const overviewContent = (
         </EntitySwitch.Case>
       </EntitySwitch>
     </Grid>
-    # Gitlab plugin
+    // Gitlab plugin
   </Grid>
 );
 
 const serviceEntityPage = (
   <EntityLayout>
-    # Gitlab plugin
+    
+    // Gitlab plugin
     <EntityLayout.Route
       if={isGitlabAvailable}
       path="/gitlab"
@@ -190,7 +193,7 @@ const serviceEntityPage = (
       >
       <EntityGitlabContent />
     </EntityLayout.Route>
-    # Gitlab plugin
+    // Gitlab plugin
 
     <EntityLayout.Route path="/" title="Overview">
       {overviewContent}
@@ -230,7 +233,8 @@ const serviceEntityPage = (
 
 const websiteEntityPage = (
   <EntityLayout>
-    # Gitlab plugin
+    
+    // Gitlab plugin
     <EntityLayout.Route
       if={isGitlabAvailable}
       path="/gitlab"
@@ -238,7 +242,7 @@ const websiteEntityPage = (
       >
       <EntityGitlabContent />
     </EntityLayout.Route>
-    # Gitlab plugin
+    // Gitlab plugin
 
     <EntityLayout.Route path="/" title="Overview">
       {overviewContent}
