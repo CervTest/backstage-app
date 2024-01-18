@@ -31,6 +31,9 @@ import search from './plugins/search';
 import { PluginEnvironment } from './types';
 import { ServerPermissionClient } from '@backstage/plugin-permission-node';
 import { DefaultIdentityClient } from '@backstage/plugin-auth-node';
+// Gitlab plugin
+import gitlab from './plugins/gitlab';
+// Gitlab plugin
 
 function makeCreateEnv(config: Config) {
   const root = getRootLogger();
@@ -93,6 +96,14 @@ async function main() {
   apiRouter.use('/techdocs', await techdocs(techdocsEnv));
   apiRouter.use('/proxy', await proxy(proxyEnv));
   apiRouter.use('/search', await search(searchEnv));
+
+  // Gitlab plugin
+  //...
+  const gitlabEnv = useHotMemoize(module, () => createEnv('gitlab'));
+  //...
+  apiRouter.use('/gitlab', await gitlab(gitlabEnv));
+  //...
+  // Gitlab plugin
 
   // Add backends ABOVE this line; this 404 handler is the catch-all fallback
   apiRouter.use(notFoundHandler());
