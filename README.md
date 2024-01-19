@@ -30,3 +30,9 @@ While working locally with this approach it is important to keep your config fil
 To validate your plugin after following the instructions run `yarn install` then `yarn tsc` and consider adjusting the locally included `catalog-info.yaml` with an appropriate annotation to test. You might also want to minimize extra tweaks to whitespace and the like to leave a clearer overview and make it easier to merge plugin branches around without causing excessive conflicts (make such edits in the relevant base branch instead)
 
 For managing secrets on the GitHub/Jenkins/GCP setup make the associated credential in Jenkins and then reference it in the `backstage-infra` repo. In there the `Jenkinsfile` will load the credential, write it into a Kubernetes secrets file locally, which is then deployed to k8s and loaded by Backstage as extra environment variables you can then simply reach normally in config. Note that there is also an additional extra override config file in the infra repo, much like the local config file when working in a developer workspace.
+
+## Nexus
+
+Follow this https://janus-idp.io/plugins/nexus-repository-manager/ for Nexus plugin and instructions on how to configure it.
+
+Note: Nexus community edition doesn't have a feature for auth token, only enterprise edition does. Workaround on this is to base64 encode user/password and apply in `app-config.yaml` as Authorization: 'Basic `user/password`'

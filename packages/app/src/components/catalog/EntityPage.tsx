@@ -58,6 +58,11 @@ import {
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
 
+import {
+  isNexusRepositoryManagerAvailable,
+  NexusRepositoryManagerPage,
+} from '@janus-idp/backstage-plugin-nexus-repository-manager';
+
 const techdocsContent = (
   <EntityTechdocsContent>
     <TechDocsAddons>
@@ -175,7 +180,15 @@ const serviceEntityPage = (
     <EntityLayout.Route path="/docs" title="Docs">
       {techdocsContent}
     </EntityLayout.Route>
-  </EntityLayout>
+
+<EntityLayout.Route
+if={isNexusRepositoryManagerAvailable}
+path="/build-artifacts"
+title="Build Artifacts"
+>
+<NexusRepositoryManagerPage />
+</EntityLayout.Route>
+</EntityLayout>
 );
 
 const websiteEntityPage = (
@@ -202,7 +215,15 @@ const websiteEntityPage = (
     <EntityLayout.Route path="/docs" title="Docs">
       {techdocsContent}
     </EntityLayout.Route>
-  </EntityLayout>
+
+<EntityLayout.Route
+if={isNexusRepositoryManagerAvailable}
+path="/build-artifacts"
+title="Build Artifacts"
+>
+<NexusRepositoryManagerPage />
+</EntityLayout.Route>
+</EntityLayout>
 );
 
 /**
