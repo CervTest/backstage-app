@@ -1,6 +1,6 @@
 app:
   title: Scaffolded Backstage App
-  baseUrl: http://ec2-54-160-113-36.compute-1.amazonaws.com:3000
+  baseUrl: http://localhost:3000
 
 organization:
   name: My Company
@@ -12,7 +12,7 @@ backend:
   # auth:
   #   keys:
   #     - secret: ${BACKEND_SECRET}
-  baseUrl: http://ec2-54-160-113-36.compute-1.amazonaws.com:7007
+  baseUrl: http://localhost:7007
   listen:
     port: 7007
     # Uncomment the following host directive to bind to specific interfaces
@@ -22,30 +22,26 @@ backend:
     # Content-Security-Policy directives follow the Helmet format: https://helmetjs.github.io/#reference
     # Default Helmet Content-Security-Policy values can be removed by setting the key to false
   cors:
-    origin: http://ec2-54-160-113-36.compute-1.amazonaws.com:3000
+    origin: http://localhost:3000
     # origin: http://localhost:3000
     methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
     credentials: true
   # This is for local development only, it is not recommended to use this in production
   # The production database configuration is stored in app-config.production.yaml
   database:
-    # client: better-sqlite3
-    # connection: ':memory:'
-    client: pg
-    connection:
-      host: "127.0.0.1"
-      port: "5432"
-      user: "postgres"
-      password: "${BSDBPW}"
+    client: better-sqlite3
+    connection: ':memory:'
+    #client: pg
+    #connection:
+    #  host: "127.0.0.1"
+    #  port: "5432"
+    #  user: "postgres"
+    #  password: "${BSDBPW}"
   # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
 
-integrations:
-  gitlab:
-    - host: gitlab.adaptavist.net
-      token: ${GITLAB_TOKEN}
-      apiBaseUrl: https://gitlab.adaptavist.net/api/v4
 
-proxy:
+
+#proxy:
   ### Example for how to add a proxy endpoint for the frontend.
   ### A typical reason to do this is to handle HTTPS and CORS for internal services.
   # endpoints:
@@ -68,7 +64,7 @@ auth:
   # see https://backstage.io/docs/auth/ to learn about auth providers
   providers: {}
 
-scaffolder:
+#scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
 
 # Note that this section can be overridden if a higher priority config file is loaded

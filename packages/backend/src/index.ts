@@ -98,11 +98,8 @@ async function main() {
   apiRouter.use('/search', await search(searchEnv));
 
   // Gitlab plugin
-  //...
   const gitlabEnv = useHotMemoize(module, () => createEnv('gitlab'));
-  //...
   apiRouter.use('/gitlab', await gitlab(gitlabEnv));
-  //...
   // Gitlab plugin
 
   // Add backends ABOVE this line; this 404 handler is the catch-all fallback

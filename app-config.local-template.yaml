@@ -6,6 +6,12 @@ organization:
   # This would override the same config option set in the client file, comment to let it win
   name: Adaptavist Dev
 
+integrations:
+  gitlab:
+    - host: gitlab.adaptavist.net
+      token: ${GITLAB_TOKEN}
+      apiBaseUrl: https://gitlab.adaptavist.net/api/v4
+
 # Note that having this section in the local config file will block any other config file to contribute catalog items
 catalog:
   import:
@@ -21,9 +27,15 @@ catalog:
     # Local example template
     - type: file
       target: ../../examples/template/template.yaml
-      rules:
 
     # Local example organizational data
     - type: file
       target: ../../examples/org.yaml
-      rules:
+
+    # Dummy catalog file to readily edit locally
+    - type: file
+      target: ../../catalog-info.yaml
+
+    # GitLab example
+    - type: url
+      target: https://gitlab.adaptavist.net/backstage/clients/draper/applications/devops-portal-applications/-/blob/main/jira-template.yml

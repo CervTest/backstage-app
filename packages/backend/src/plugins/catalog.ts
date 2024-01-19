@@ -2,7 +2,7 @@ import { CatalogBuilder } from '@backstage/plugin-catalog-backend';
 import { ScaffolderEntitiesProcessor } from '@backstage/plugin-catalog-backend-module-scaffolder-entity-model';
 import { Router } from 'express';
 import { PluginEnvironment } from '../types';
-//gitlab plugin
+// gitlab plugin
 import { GitlabFillerProcessor } from '@immobiliarelabs/backstage-plugin-gitlab-backend';
 // gitlab plugin
 

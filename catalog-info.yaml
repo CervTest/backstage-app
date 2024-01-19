@@ -1,12 +1,11 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: backstage
-  description: An example of a Backstage application.
+  name: gitlab-test-entity
+  description: An example of an entity with GitLab integrations.
   # Example for optional annotations
-  # annotations:
-  #   github.com/project-slug: backstage/backstage
-  #   backstage.io/techdocs-ref: dir:.
+  annotations:
+    gitlab.com/project-slug: "backstage/clients/draper/dev-ops-portal"
 spec:
   type: website
   owner: john@example.com
