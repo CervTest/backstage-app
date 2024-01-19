@@ -123,3 +123,10 @@ https://github.com/backstage/backstage/blob/master/plugins/sonarqube-backend/REA
 * Adjust `packages/backend/src/index.ts` as per instructions
 * Add a `sonarqube` block to config
   * Note that the API token needs a certain level of access, a user token from an admin user was enough. You can test a token while bypassing Backstage with: `curl -X GET -H "Authorization: Bearer <api token>" "https://<sonar host>/api/projects/search?projects=<project key>"`
+
+
+## Nexus
+
+Follow this https://janus-idp.io/plugins/nexus-repository-manager/ for Nexus plugin and instructions on how to configure it.
+
+Note: Nexus community edition doesn't have a feature for auth token, only enterprise edition does. Workaround on this is to base64 encode user/password and apply in `app-config.yaml` as Authorization: 'Basic `user/password`'

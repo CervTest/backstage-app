@@ -43,3 +43,6 @@ JENKINS_API_TOKEN=
 
 # Sonarqube API token
 SONAR_TOKEN=
+
+# Nexus Authorization
+AUTHORIZATION=
