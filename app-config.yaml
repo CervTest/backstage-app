@@ -54,7 +54,7 @@ proxy:
       target: 'https://nexus.terasology.io'
       headers:
         X-Requested-With: 'XMLHttpRequest'
-        Authorization: ${NEXUS_AUTHORIZATION}
+        Authorization: 'Basic ${NEXUS_AUTHORIZATION}'
       changeOrigin: true
       # Change to "false" in case of using self hosted Nexus Repository Manager instance with a self-signed certificate
       secure: true
