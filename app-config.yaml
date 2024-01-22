@@ -1,6 +1,6 @@
 app:
   title: Scaffolded Backstage App
-  baseUrl: http://localhost:3000
+  baseUrl: http://ec2-54-160-113-36.compute-1.amazonaws.com:3000
 
 organization:
   name: My Company
@@ -12,17 +12,23 @@ backend:
   # auth:
   #   keys:
   #     - secret: ${BACKEND_SECRET}
-  baseUrl: http://localhost:7007
+  baseUrl: http://ec2-54-160-113-36.compute-1.amazonaws.com:7007
   listen:
     port: 7007
     # Uncomment the following host directive to bind to specific interfaces
     # host: 127.0.0.1
   csp:
     connect-src: ["'self'", 'http:', 'https:']
+    img-src: 
+      # "'self'" and 'data' are from the backstage default but must be set since img-src is overriden
+      - "'self'"
+      - 'data:'
+      # Allow your Jira instance for @roadiehq/backstage-plugin-jira
+      - 'tracker.adaptavist.com'
     # Content-Security-Policy directives follow the Helmet format: https://helmetjs.github.io/#reference
     # Default Helmet Content-Security-Policy values can be removed by setting the key to false
   cors:
-    origin: http://localhost:3000
+    origin: http://ec2-54-160-113-36.compute-1.amazonaws.com:3000
     methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
     credentials: true
   # This is for local development only, it is not recommended to use this in production
@@ -33,17 +39,22 @@ backend:
   # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
 
 integrations:
-  github:
-    - host: github.com
-      # This is a Personal Access Token or PAT from GitHub. You can find out how to generate this token, and more information
-      # about setting up the GitHub integration here: https://backstage.io/docs/getting-started/configuration#setting-up-a-github-integration
-      #token: ${GITHUB_TOKEN}
-    ### Example for how to add your GitHub Enterprise instance using the API:
-    # - host: ghe.example.net
-    #   apiBaseUrl: https://ghe.example.net/api/v3
-    #   token: ${GHE_TOKEN}
+  gitlab:
+    - host: gitlab.adaptavist.net
+      token: ${GITLAB_TOKEN}
+      apiBaseUrl: https://gitlab.adaptavist.net/api/v4
 
-#proxy:
+proxy:
+  '/jira/api':
+    target: 'tracker.adaptavist.com'
+    headers:
+      Authorization:
+        $env: Y3NhbmRlcnNAYWRhcHRhdmlzdC5jb206T0RFME5ESTNNekl6TXpZNU9xZlNHNGVmcDc5QTljbHhLTEp6YjRjd0EwZHI=
+      Accept: 'application/json'
+      Content-Type: 'application/json'
+      X-Atlassian-Token: 'nocheck'
+      User-Agent: "MY-UA-STRING"
+
   ### Example for how to add a proxy endpoint for the frontend.
   ### A typical reason to do this is to handle HTTPS and CORS for internal services.
   # endpoints:
@@ -71,24 +82,8 @@ auth:
 
 # Note that this section can be overridden if a higher priority config file is loaded
 catalog:
-  import:
-    entityFilename: catalog-info.yaml
-    pullRequestBranchName: backstage-integration
   rules:
-    - allow: [Component, System, API, Resource, Location, User, Group, Domain, Template]
+    - allow: [Component, System, API, Group, User, Resource, Location, Template]
   locations:
-    # Local example data, file locations are relative to the backend process, typically `packages/backend`
-    - type: file
-      target: ../../examples/entities.yaml
-
-    # Local example template
-    - type: file
-      target: ../../examples/template/template.yaml
-
-    # Local example organizational data
-    - type: file
-      target: ../../examples/org.yaml
-
-    # Dummy catalog file to readily edit locally
-    - type: file
-      target: ../../catalog-info.yaml
+    - type: url
+      target: https://gitlab.adaptavist.net/backstage/clients/draper/applications/devops-portal-applications/-/blob/main/jira-plugin-test-template.yml

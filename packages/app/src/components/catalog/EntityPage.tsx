@@ -58,6 +58,10 @@ import {
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
 
+// jira plugin
+import { EntityJiraOverviewCard, isJiraAvailable } from '@roadiehq/backstage-plugin-jira';
+// jira plugin
+
 const techdocsContent = (
   <EntityTechdocsContent>
     <TechDocsAddons>
@@ -122,6 +126,17 @@ const entityWarningContent = (
 );
 
 const overviewContent = (
+  // jira plugin
+  <Grid container spacing={3} alignItems="stretch">
+  <EntitySwitch>
+    <EntitySwitch.Case if={isJiraAvailable}>
+      <Grid item md={6}>
+        <EntityJiraOverviewCard />
+      </Grid>
+    </EntitySwitch.Case>
+  </EntitySwitch>
+</Grid>
+// jira plugin
   <Grid container spacing={3} alignItems="stretch">
     {entityWarningContent}
     <Grid item md={6}>
