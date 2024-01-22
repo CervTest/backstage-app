@@ -38,5 +38,5 @@ SEGMENT_WRITE_KEY=
 # Debugging log level (set to `debug` to enable verbose debugging output)
 LOG_LEVEL=
 
-# Nexus Authorization
+# Nexus Authorization - base64 encoded user:pass for an auth header
 NEXUS_AUTHORIZATION=
