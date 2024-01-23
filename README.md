@@ -74,3 +74,32 @@ Note that this example only applies the Jenkins extras to entities of type _serv
 #### Back-end
 
 Full instructions via links, abbreviated instructions follow
+
+### Sonar
+
+This plugin supports either [Sonarqube](https://www.sonarsource.com/products/sonarqube/) (self-managed) and [SonarCloud](https://www.sonarsource.com/products/sonarcloud/)
+
+It has both front-end and back-end plugins, commands need to run from the root directory of a Backstage workspace.
+
+#### Front-end
+
+https://github.com/backstage/backstage/blob/master/plugins/sonarqube/README.md
+
+* `yarn add --cwd packages/app @backstage/plugin-sonarqube`
+* Add a card to `EntityPage.tsx` as per instructions
+* Add an annotation to relevant entities like so: `sonarqube.org/project-key: YOUR_PROJECT_KEY`
+* Yarn install, tsc, and test with some entity (after back-end is also ready)
+
+Note that this example adds the Code Quality card to _every_ entity regardless of whether the Sonarqube annotation is present or if the project exists. A better conditional approach is warranted but is at present outside the scope of this sample implementation.
+
+#### Back-end
+
+For simplicity still not using the new backend system instructions
+
+https://github.com/backstage/backstage/blob/master/plugins/sonarqube-backend/README.md
+
+* `yarn add --cwd packages/backend @backstage/plugin-sonarqube-backend`
+* Add `packages/backend/src/plugins/sonarqube.ts` with text provided
+* Adjust `packages/backend/src/index.ts` as per instructions
+* Add a `sonarqube` block to config
+  * Note that the API token needs a certain level of access, a user token from an admin user was enough. You can test a token while bypassing Backstage with: `curl -X GET -H "Authorization: Bearer <api token>" "https://<sonar host>/api/projects/search?projects=<project key>"`

@@ -11,6 +11,11 @@ jenkins:
   username: cervator
   apiKey: ${JENKINS_API_TOKEN}
 
+
+sonarqube:
+  baseUrl: https://sonarqube.terasology.io
+  apiKey: ${SONAR_TOKEN}
+
 # Note that having this section in the local config file will block any other config file to contribute catalog items
 catalog:
   import:

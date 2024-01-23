@@ -40,3 +40,6 @@ LOG_LEVEL=
 
 # Jenkins API token for its plugin - must match a user granted permissions in all lower-case
 JENKINS_API_TOKEN=
+
+# Sonarqube API token
+SONAR_TOKEN=

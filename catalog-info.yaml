@@ -5,6 +5,7 @@ metadata:
   description: An example of a generated application from a template that's wired up to an integration.
   annotations:
     jenkins.io/job-full-name: Experimental/CervTest/jibby
+    sonarqube.org/project-key: com.venue.jibby.nojira
 spec:
   type: service
   owner: john@example.com
