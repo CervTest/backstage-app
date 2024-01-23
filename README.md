@@ -103,3 +103,17 @@ https://github.com/backstage/backstage/blob/master/plugins/sonarqube-backend/REA
 * Adjust `packages/backend/src/index.ts` as per instructions
 * Add a `sonarqube` block to config
   * Note that the API token needs a certain level of access, a user token from an admin user was enough. You can test a token while bypassing Backstage with: `curl -X GET -H "Authorization: Bearer <api token>" "https://<sonar host>/api/projects/search?projects=<project key>"`
+
+
+### Nexus
+
+Follow this https://janus-idp.io/plugins/nexus-repository-manager/ for Nexus plugin and instructions on how to configure it. "Janus" is a Backstage flavor prepared by RedHat.
+
+* `yarn workspace app add @janus-idp/backstage-plugin-nexus-repository-manager`
+* Add proxy block in config file including auth
+  * Unfortunately in the CE we can't use a token, instead base64 encode user:password 
+* Adjust `EntityPage.tsx` as per instructions and preferences
+* Add the Nexus annotation to one or more entities pointing at an image within a named repo (see official docs for more annotations)
+  * `nexus-repository-manager/docker.image-name: repository/docker-nexus/nginx`
+
+Note that for the moment a mix of additions is included, both in `app-config.yaml` (general Nexus config) and in the local config template file that will generate `app-config.local.yaml` (local test entity file)
