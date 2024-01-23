@@ -37,3 +37,6 @@ SEGMENT_WRITE_KEY=
 
 # Debugging log level (set to `debug` to enable verbose debugging output)
 LOG_LEVEL=
+
+# Jenkins API token for its plugin - must match a user granted permissions in all lower-case
+JENKINS_API_TOKEN=
