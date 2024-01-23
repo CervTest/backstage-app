@@ -126,18 +126,18 @@ const entityWarningContent = (
 );
 
 const overviewContent = (
-  // jira plugin
   <Grid container spacing={3} alignItems="stretch">
-  <EntitySwitch>
-    <EntitySwitch.Case if={isJiraAvailable}>
-      <Grid item md={6}>
-        <EntityJiraOverviewCard />
-      </Grid>
-    </EntitySwitch.Case>
-  </EntitySwitch>
-</Grid>
-// jira plugin
-  <Grid container spacing={3} alignItems="stretch">
+
+    // jira plugin
+    <EntitySwitch>
+        <EntitySwitch.Case if={isJiraAvailable}>
+          <Grid item md={6}>
+            <EntityJiraOverviewCard />
+          </Grid>
+        </EntitySwitch.Case>
+      </EntitySwitch>
+    // jira plugin
+
     {entityWarningContent}
     <Grid item md={6}>
       <EntityAboutCard variant="gridItem" />
