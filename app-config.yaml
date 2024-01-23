@@ -49,7 +49,7 @@ proxy:
     target: 'tracker.adaptavist.com'
     headers:
       Authorization:
-        $env: Y3NhbmRlcnNAYWRhcHRhdmlzdC5jb206T0RFME5ESTNNekl6TXpZNU9xZlNHNGVmcDc5QTljbHhLTEp6YjRjd0EwZHI=
+        $env: ${JIRAPLUGINTOKEN}
       Accept: 'application/json'
       Content-Type: 'application/json'
       X-Atlassian-Token: 'nocheck'
