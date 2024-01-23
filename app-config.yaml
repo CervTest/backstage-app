@@ -44,12 +44,7 @@ integrations:
     #   token: ${GHE_TOKEN}
 
 proxy:
-  ### Example for how to add a proxy endpoint for the frontend.
-  ### A typical reason to do this is to handle HTTPS and CORS for internal services.
   endpoints:
-  #   '/test':
-  #     target: 'https://example.com'
-      # changeOrigin: true
     '/nexus-repository-manager':
       target: 'https://nexus.terasology.io'
       headers:

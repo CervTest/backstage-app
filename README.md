@@ -31,8 +31,15 @@ To validate your plugin after following the instructions run `yarn install` then
 
 For managing secrets on the GitHub/Jenkins/GCP setup make the associated credential in Jenkins and then reference it in the `backstage-infra` repo. In there the `Jenkinsfile` will load the credential, write it into a Kubernetes secrets file locally, which is then deployed to k8s and loaded by Backstage as extra environment variables you can then simply reach normally in config. Note that there is also an additional extra override config file in the infra repo, much like the local config file when working in a developer workspace.
 
-## Nexus
+### Nexus
 
-Follow this https://janus-idp.io/plugins/nexus-repository-manager/ for Nexus plugin and instructions on how to configure it.
+Follow this https://janus-idp.io/plugins/nexus-repository-manager/ for Nexus plugin and instructions on how to configure it. "Janus" is a Backstage flavor prepared by RedHat.
 
-Note: Nexus community edition doesn't have a feature for auth token, only enterprise edition does. Workaround on this is to base64 encode user/password and apply in `app-config.yaml` as Authorization: 'Basic `user/password`'
+* `yarn workspace app add @janus-idp/backstage-plugin-nexus-repository-manager`
+* Add proxy block in config file including auth
+  * Unfortunately in the CE we can't use a token, instead base64 encode user:password 
+* Adjust `EntityPage.tsx` as per instructions and preferences
+* Add the Nexus annotation to one or more entities pointing at an image within a named repo (see official docs for more annotations)
+  * `nexus-repository-manager/docker.image-name: repository/docker-nexus/nginx`
+
+Note that for the moment a mix of additions is included, both in `app-config.yaml` (general Nexus config) and in the local config template file that will generate `app-config.local.yaml` (local test entity file)
