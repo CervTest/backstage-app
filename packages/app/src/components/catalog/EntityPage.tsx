@@ -58,7 +58,7 @@ import {
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
 
-// Gitlab plugin
+// Note: Most of these widgets are used solely on the GitLab tab, but could be added elsewhere
 import {
     isGitlabAvailable,
     EntityGitlabContent,
@@ -70,7 +70,6 @@ import {
     EntityGitlabReadmeCard,
     EntityGitlabReleasesCard,
 } from '@immobiliarelabs/backstage-plugin-gitlab';
-// Gitlab plugin
 
 const techdocsContent = (
   <EntityTechdocsContent>
@@ -150,53 +149,31 @@ const overviewContent = (
     <Grid item md={8} xs={12}>
       <EntityHasSubcomponentsCard variant="gridItem" />
     </Grid>
-    // Gitlab plugin
     <Grid container spacing={3} alignItems="stretch">
       <EntitySwitch>
         <EntitySwitch.Case if={isGitlabAvailable}>
           <Grid item md={12}>
               <EntityGitlabReadmeCard />
           </Grid>
-          <Grid item sm={12} md={3} lg={3}>
-              <EntityGitlabPeopleCard />
-          </Grid>
-          <Grid item sm={12} md={3} lg={3}>
-              <EntityGitlabLanguageCard />
-          </Grid>
-          <Grid item sm={12} md={3} lg={3}>
-              <EntityGitlabMergeRequestStatsCard />
-          </Grid>
-          <Grid item sm={12} md={3} lg={3}>
-              <EntityGitlabReleasesCard />
-          </Grid>
-          <Grid item md={12}>
-              <EntityGitlabPipelinesTable />
-          </Grid>
-          <Grid item md={12}>
-              <EntityGitlabMergeRequestsTable />
-          </Grid>
         </EntitySwitch.Case>
       </EntitySwitch>
     </Grid>
-    // Gitlab plugin
   </Grid>
 );
 
 const serviceEntityPage = (
   <EntityLayout>
-    
-    // Gitlab plugin
+
+    <EntityLayout.Route path="/" title="Overview">
+      {overviewContent}
+    </EntityLayout.Route>
+
     <EntityLayout.Route
       if={isGitlabAvailable}
       path="/gitlab"
       title="Gitlab"
       >
       <EntityGitlabContent />
-    </EntityLayout.Route>
-    // Gitlab plugin
-
-    <EntityLayout.Route path="/" title="Overview">
-      {overviewContent}
     </EntityLayout.Route>
 
     <EntityLayout.Route path="/ci-cd" title="CI/CD">
@@ -233,19 +210,17 @@ const serviceEntityPage = (
 
 const websiteEntityPage = (
   <EntityLayout>
-    
-    // Gitlab plugin
+
+    <EntityLayout.Route path="/" title="Overview">
+      {overviewContent}
+    </EntityLayout.Route>
+
     <EntityLayout.Route
       if={isGitlabAvailable}
       path="/gitlab"
       title="Gitlab"
       >
       <EntityGitlabContent />
-    </EntityLayout.Route>
-    // Gitlab plugin
-
-    <EntityLayout.Route path="/" title="Overview">
-      {overviewContent}
     </EntityLayout.Route>
 
     <EntityLayout.Route path="/ci-cd" title="CI/CD">
