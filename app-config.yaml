@@ -52,7 +52,7 @@ integrations:
 proxy:
   '/jira/api':
     # target: https://venuesh.atlassian.net
-    target: https://tracker.adaptavist.com/rest/api/latest
+    target: https://tracker.adaptavist.com
     headers:
       Authorization:
         $env: ${JIRAPLUGINTOKEN}
