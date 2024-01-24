@@ -1,6 +1,6 @@
 app:
   title: Scaffolded Backstage App
-  baseUrl: ${FQDN}:3000
+  baseUrl: http://localhost:8080
 
 organization:
   name: My Company
@@ -12,9 +12,9 @@ backend:
   # auth:
   #   keys:
   #     - secret: ${BACKEND_SECRET}
-  baseUrl: ${FQDN}:7007
+  baseUrl: http://localhost:8081
   listen:
-    port: 7007
+    port: 8081
     # Uncomment the following host directive to bind to specific interfaces
     # host: 127.0.0.1
   csp:
@@ -28,7 +28,7 @@ backend:
     # Content-Security-Policy directives follow the Helmet format: https://helmetjs.github.io/#reference
     # Default Helmet Content-Security-Policy values can be removed by setting the key to false
   cors:
-    origin: ${FQDN}e:3000
+    origin: http://localhost:8080
     methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
     credentials: true
   # This is for local development only, it is not recommended to use this in production
@@ -46,7 +46,7 @@ integrations:
 
 proxy:
   '/jira/api':
-    target: 'tracker.adaptavist.com'
+    target: 'https://tracker.adaptavist.com/rest/api/latest'
     headers:
       Authorization:
         $env: ${JIRAPLUGINTOKEN}
