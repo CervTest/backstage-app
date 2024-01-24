@@ -30,3 +30,19 @@ While working locally with this approach it is important to keep your config fil
 To validate your plugin after following the instructions run `yarn install` then `yarn tsc` and consider adjusting the locally included `catalog-info.yaml` with an appropriate annotation to test. You might also want to minimize extra tweaks to whitespace and the like to leave a clearer overview and make it easier to merge plugin branches around without causing excessive conflicts (make such edits in the relevant base branch instead)
 
 For managing secrets on the GitHub/Jenkins/GCP setup make the associated credential in Jenkins and then reference it in the `backstage-infra` repo. In there the `Jenkinsfile` will load the credential, write it into a Kubernetes secrets file locally, which is then deployed to k8s and loaded by Backstage as extra environment variables you can then simply reach normally in config. Note that there is also an additional extra override config file in the infra repo, much like the local config file when working in a developer workspace.
+
+### Jira
+
+Installing via instructions from https://github.com/RoadieHQ/roadie-backstage-plugins/tree/main/plugins/frontend/backstage-plugin-jira
+
+* Run `yarn add @roadiehq/backstage-plugin-jira` from the `packages/app` directory
+* Create a token for your desired Jira account then base64 encode it accordingly _making sure you get the format correct:_ `'Basic abcdef'`
+* Adjust config with proxy details for Jira
+  * The `jira` config block can be skipped if default proxy details are good enough
+* Add your JIRA url as a CSP entry as per instructions
+* Add a widget into `EntityPage.tsx`
+* Add an annotation to a test entity like: `jira/project-key: VSH` 
+* `yarn install`
+* `yarn tsc`
+* `yarn dev`
+* Look at the test entity

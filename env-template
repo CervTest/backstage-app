@@ -35,5 +35,8 @@ BITBUCKET_API_TOKEN=
 # (optional) Used for sending analytics data to Segment
 SEGMENT_WRITE_KEY=
 
+# Jira token with a prefix - needs to be `<useremail>:<PAT>` before base64 encoding, replace abc below
+JIRA_TOKEN='Basic abc'
+
 # Debugging log level (set to `debug` to enable verbose debugging output)
 LOG_LEVEL=
