@@ -5,7 +5,8 @@ metadata:
   description: An example of a Backstage application.
   # Example for optional annotations
   annotations:
-    jira/project-key: VSH
+    jira/project-key: DRAP
+    jira/token-type: Bearer
 spec:
   type: website
   owner: john@example.com

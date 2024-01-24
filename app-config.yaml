@@ -24,7 +24,7 @@ backend:
       - "'self'"
       - 'data:'
       # Allow your Jira instance for @roadiehq/backstage-plugin-jira
-      - 'https://venuesh.atlassian.net'
+      - 'https://tracker.adaptavist.com'
     # Content-Security-Policy directives follow the Helmet format: https://helmetjs.github.io/#reference
     # Default Helmet Content-Security-Policy values can be removed by setting the key to false
   cors:
@@ -51,10 +51,11 @@ integrations:
 
 proxy:
   '/jira/api':
-    target: https://venuesh.atlassian.net
+    # target: https://venuesh.atlassian.net
+    target: https://tracker.adaptavist.com/rest/api/latest
     headers:
       Authorization:
-        $env: JIRA_TOKEN
+        $env: ${JIRAPLUGINTOKEN}
       Accept: 'application/json'
       Content-Type: 'application/json'
       X-Atlassian-Token: 'no-check'
