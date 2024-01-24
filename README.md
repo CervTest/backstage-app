@@ -37,6 +37,7 @@ Installing via instructions from https://github.com/RoadieHQ/roadie-backstage-pl
 
 * Run `yarn add @roadiehq/backstage-plugin-jira` from the `packages/app` directory
 * Create a token for your desired Jira account then base64 encode it accordingly _making sure you get the format correct:_ `'Basic abcdef'`
+  * You can validate your API access using `curl` with something like the following, replacing `abc` with your token: `curl -X GET -H "Authorization: Basic abc" -H "Content-Type: application/json" "https://venuesh.atlassian.net/rest/api/2/search?jql=project=VSH"`
 * Adjust config with proxy details for Jira
   * The `jira` config block can be skipped if default proxy details are good enough
 * Add your JIRA url as a CSP entry as per instructions
