@@ -52,6 +52,15 @@ export default async function createPlugin(
     }),
   });
 
+  // conf plugin start
+  indexBuilder.addCollator({
+    schedule: halfHourSchedule,
+    factory: ConfluenceCollatorFactory.fromConfig(env.config, {
+      logger: env.logger,
+    }),
+  });
+  // conf plugin end
+
   // The scheduler controls when documents are gathered from collators and sent
   // to the search engine for indexing.
   const { scheduler } = await indexBuilder.build();
