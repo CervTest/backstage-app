@@ -53,8 +53,15 @@ export default async function createPlugin(
   });
 
   // conf plugin start
+  // const halfHourSchedule = env.scheduler.createScheduledTaskRunner({
+  //   frequency: Duration.fromObject({ minutes: 30 }),
+  //   timeout: Duration.fromObject({ minutes: 15 }),
+  //   // A 3 second delay gives the backend server a chance to initialize before
+  //   // any collators are executed, which may attempt requests against the API.
+  //   initialDelay: Duration.fromObject({ seconds: 3 }),
+  // });
   indexBuilder.addCollator({
-    schedule: halfHourSchedule,
+    schedule: schedule,
     factory: ConfluenceCollatorFactory.fromConfig(env.config, {
       logger: env.logger,
     }),

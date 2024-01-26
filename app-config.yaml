@@ -96,11 +96,11 @@ catalog:
 confluence:
   # Confluence base URL for wiki API
   # Typically: https://{org-name}.atlassian.net/wiki
-  wikiUrl: https://i.adaptavist.com/wiki
+  wikiUrl: https://adaptavist-group.atlassian.net/wiki
 
   # List of spaces to index
   # See https://confluence.atlassian.com/conf59/spaces-792498593.html
-  spaces: csanders
+  spaces: [ISEC]
 
   # Authentication credentials towards Confluence API
   auth:
