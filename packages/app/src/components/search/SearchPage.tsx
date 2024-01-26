@@ -25,6 +25,11 @@ import {
 } from '@backstage/core-components';
 import { useApi } from '@backstage/core-plugin-api';
 
+// conf plugin start
+import { DocsIcon } from '@backstage/core-components';
+import { ConfluenceResultListItem } from '@k-phoen/backstage-plugin-confluence';
+// conf plugin end
+
 const useStyles = makeStyles((theme: Theme) => ({
   bar: {
     padding: theme.spacing(1, 0),
@@ -70,6 +75,13 @@ const SearchPage = () => {
                   name: 'Documentation',
                   icon: <DocsIcon />,
                 },
+                // conf plugin start
+                {
+                  value: 'confluence',
+                  name: 'Confluence',
+                  icon: <DocsIcon />,
+                },
+                // conf plugin end
               ]}
             />
             <Paper className={classes.filters}>
@@ -113,6 +125,9 @@ const SearchPage = () => {
             <SearchResult>
               <CatalogSearchResultListItem icon={<CatalogIcon />} />
               <TechDocsSearchResultListItem icon={<DocsIcon />} />
+              // conf plugin start
+              <ConfluenceResultListItem />
+              // conf plugin end
             </SearchResult>
           </Grid>
         </Grid>

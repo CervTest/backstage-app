@@ -8,6 +8,9 @@ import { PluginEnvironment } from '../types';
 import { DefaultCatalogCollatorFactory } from '@backstage/plugin-search-backend-module-catalog';
 import { DefaultTechDocsCollatorFactory } from '@backstage/plugin-search-backend-module-techdocs';
 import { Router } from 'express';
+// conf plugin start
+import { ConfluenceCollatorFactory } from '@k-phoen/backstage-plugin-confluence-backend';
+// conf plugin end
 
 export default async function createPlugin(
   env: PluginEnvironment,
