@@ -26,7 +26,7 @@ import {
 import { useApi } from '@backstage/core-plugin-api';
 
 // conf plugin start
-import { DocsIcon } from '@backstage/core-components';
+// import { DocsIcon } from '@backstage/core-components';
 import { ConfluenceResultListItem } from '@k-phoen/backstage-plugin-confluence';
 // conf plugin end
 
