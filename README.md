@@ -30,3 +30,29 @@ While working locally with this approach it is important to keep your config fil
 To validate your plugin after following the instructions run `yarn install` then `yarn tsc` and consider adjusting the locally included `catalog-info.yaml` with an appropriate annotation to test. You might also want to minimize extra tweaks to whitespace and the like to leave a clearer overview and make it easier to merge plugin branches around without causing excessive conflicts (make such edits in the relevant base branch instead)
 
 For managing secrets on the GitHub/Jenkins/GCP setup make the associated credential in Jenkins and then reference it in the `backstage-infra` repo. In there the `Jenkinsfile` will load the credential, write it into a Kubernetes secrets file locally, which is then deployed to k8s and loaded by Backstage as extra environment variables you can then simply reach normally in config. Note that there is also an additional extra override config file in the infra repo, much like the local config file when working in a developer workspace.
+
+## Confluence Plugin
+
+This is 2 separate plugins, one for app and the other for backend.
+
+References are made to the files in this repository for adding code, instead of documentation, as the documentation may be out of date for newer versions of Backstage, and tend to assume a level of expertise with Node and how the backend operates.
+
+### app
+
+https://github.com/K-Phoen/backstage-plugin-confluence/tree/main/plugins/search-confluence
+
+Add plugin to the front end:
+
+`cd packages/app && yarn add @k-phoen/backstage-plugin-confluence`
+
+See the file packages/app/src/components/search/SearchPage.tsx and search for code inserted between `conf plugin start/end` comments to see where code was added.
+
+### backend
+
+https://github.com/K-Phoen/backstage-plugin-confluence/tree/main/plugins/search-confluence-backend
+
+Add plugin to the backend:
+
+`cd packages/backend && yarn add @k-phoen/backstage-plugin-confluence-backend`
+
+See the files app-config.yaml and packages/backend/src/plugins/search.ts and search for code inserted between `conf plugin start/end` comments to see where code was added.
