@@ -43,6 +43,10 @@ If you desire more information beyond the installation basics, then see the link
 
 #### GitLab Plugin Installation
 
+*BIG NOTE:* The GitLab plugin comes with an annotation to enable for a given entity like many other plugins do. However if that entity does not _live_ in a GitLab repo and is ingested by Backstage from its native habitat it may fail to list GitLab details. A different entity imported directly from GitLab should work fine.
+
+Example: https://gitlab.adaptavist.net/backstage/clients/draper/deployments/jira2/-/blob/master/catalog-info.yml
+
 ##### Install Plugin
 
 In the Backstage root directory, run:

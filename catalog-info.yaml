@@ -5,6 +5,7 @@ metadata:
   description: An example of an entity with GitLab integrations.
   # Example for optional annotations
   annotations:
+    # TODO: This approach does not actually work? But if you import an entity from a GitLab repo it does (annotation or not)
     gitlab.com/project-slug: "backstage/clients/draper/dev-ops-portal"
     jira/project-key: VSH # Cloud
     #jira/project-key: DRAP # DC

@@ -46,6 +46,11 @@ backend:
     #  password: "${BSDBPW}"
   # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
 
+integrations:
+  gitlab:
+    - host: gitlab.adaptavist.net
+      token: ${GITLAB_TOKEN}
+      apiBaseUrl: https://gitlab.adaptavist.net/api/v4
 
 proxy:
   '/jira/api':
