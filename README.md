@@ -30,3 +30,42 @@ While working locally with this approach it is important to keep your config fil
 To validate your plugin after following the instructions run `yarn install` then `yarn tsc` and consider adjusting the locally included `catalog-info.yaml` with an appropriate annotation to test. You might also want to minimize extra tweaks to whitespace and the like to leave a clearer overview and make it easier to merge plugin branches around without causing excessive conflicts (make such edits in the relevant base branch instead)
 
 For managing secrets on the GitHub/Jenkins/GCP setup make the associated credential in Jenkins and then reference it in the `backstage-infra` repo. In there the `Jenkinsfile` will load the credential, write it into a Kubernetes secrets file locally, which is then deployed to k8s and loaded by Backstage as extra environment variables you can then simply reach normally in config. Note that there is also an additional extra override config file in the infra repo, much like the local config file when working in a developer workspace.
+
+### GitLab
+
+Find the Gitlab plugin at this link:
+
+  * https://github.com/immobiliare/backstage-plugin-gitlab - front and back end
+
+Full instructions are at the link, but are written assuming the reader has some level of expertise in Backstage plugin installation and/or Node development, so specific instructions follow.
+
+If you desire more information beyond the installation basics, then see the link to the plugin.
+
+#### GitLab Plugin Installation
+
+##### Install Plugin
+
+In the Backstage root directory, run:
+
+```
+yarn --cwd packages/app add @immobiliarelabs/backstage-plugin-gitlab
+yarn --cwd packages/backend add @immobiliarelabs/backstage-plugin-gitlab-backend
+```
+
+##### Editing Config Files
+
+The configuration files can be arranged differently based on user preference and/or use case. This largely affects positioning on the screen when the page is rendered in the browser. Therefore, this section will simply refer you to the edited configuration files, and within them, locate the lines that have been bracketed with the comment "Gitlab plugin".
+
+The following configuration files were edited or created:
+
+  * packages/app/src/components/catalog/EntityPage.tsx
+    * Note that I added the plugin section to both the overview and website sections.
+  * app-config.yaml
+    * Just for the Gitlab integration, which may already be there.
+  * packages/backend/src/plugins/catalog.ts
+  * packages/backend/src/plugins/gitlab.ts
+  * packages/backend/src/index.ts
+
+##### The New Backend System
+
+Not currently in use.

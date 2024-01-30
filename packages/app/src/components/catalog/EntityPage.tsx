@@ -58,6 +58,12 @@ import {
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
 
+import {
+    isGitlabAvailable,
+    EntityGitlabContent,
+    EntityGitlabReadmeCard,
+} from '@immobiliarelabs/backstage-plugin-gitlab';
+
 const techdocsContent = (
   <EntityTechdocsContent>
     <TechDocsAddons>
@@ -130,20 +136,37 @@ const overviewContent = (
     <Grid item md={6} xs={12}>
       <EntityCatalogGraphCard variant="gridItem" height={400} />
     </Grid>
-
     <Grid item md={4} xs={12}>
       <EntityLinksCard />
     </Grid>
     <Grid item md={8} xs={12}>
       <EntityHasSubcomponentsCard variant="gridItem" />
     </Grid>
+    <Grid container spacing={3} alignItems="stretch">
+      <EntitySwitch>
+        <EntitySwitch.Case if={isGitlabAvailable}>
+          <Grid item md={12}>
+              <EntityGitlabReadmeCard />
+          </Grid>
+        </EntitySwitch.Case>
+      </EntitySwitch>
+    </Grid>
   </Grid>
 );
 
 const serviceEntityPage = (
   <EntityLayout>
+
     <EntityLayout.Route path="/" title="Overview">
       {overviewContent}
+    </EntityLayout.Route>
+
+    <EntityLayout.Route
+      if={isGitlabAvailable}
+      path="/gitlab"
+      title="Gitlab"
+      >
+      <EntityGitlabContent />
     </EntityLayout.Route>
 
     <EntityLayout.Route path="/ci-cd" title="CI/CD">
@@ -180,8 +203,17 @@ const serviceEntityPage = (
 
 const websiteEntityPage = (
   <EntityLayout>
+
     <EntityLayout.Route path="/" title="Overview">
       {overviewContent}
+    </EntityLayout.Route>
+
+    <EntityLayout.Route
+      if={isGitlabAvailable}
+      path="/gitlab"
+      title="Gitlab"
+      >
+      <EntityGitlabContent />
     </EntityLayout.Route>
 
     <EntityLayout.Route path="/ci-cd" title="CI/CD">
