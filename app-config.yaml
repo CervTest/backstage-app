@@ -96,12 +96,13 @@ catalog:
 confluence:
   # Confluence base URL for wiki API
   # Typically: https://{org-name}.atlassian.net/wiki
-  wikiUrl: https://adaptavist-group.atlassian.net/wiki
+  wikiUrl: https://venuesh.atlassian.net/wiki/ # Cloud
+  #wikiUrl: https://i.adaptavist.com # DC
 
   # List of spaces to index
   # See https://confluence.atlassian.com/conf59/spaces-792498593.html
-  spaces: [ISEC]
-
+  spaces: [Venuesh] # Cloud
+  #spaces: [DH] # DC
   # Authentication credentials towards Confluence API
   auth:
     username: ${CONFLUENCE_USERNAME}

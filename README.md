@@ -56,3 +56,10 @@ Add plugin to the backend:
 `cd packages/backend && yarn add @k-phoen/backstage-plugin-confluence-backend`
 
 See the files app-config.yaml and packages/backend/src/plugins/search.ts and search for code inserted between `conf plugin start/end` comments to see where code was added.
+
+For API testing you can use:
+
+* Cloud: `curl -u <email>:<unencoded PAT> https://venuesh.atlassian.net/wiki/rest/api/content/`
+* DC: `curl -H "Authorization: Bearer <unencoded PAT>" https://i.adaptavist.com/rest/api/space/DH`
+
+However, unlike the Jira plugin's use of proxy config Confluence defines an integration which may not include the freedom to supply custom headers to vary between Cloud and DC :-(
