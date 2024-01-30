@@ -8,6 +8,9 @@ import { PluginEnvironment } from '../types';
 import { DefaultCatalogCollatorFactory } from '@backstage/plugin-search-backend-module-catalog';
 import { DefaultTechDocsCollatorFactory } from '@backstage/plugin-search-backend-module-techdocs';
 import { Router } from 'express';
+// conf plugin start
+import { ConfluenceCollatorFactory } from '@k-phoen/backstage-plugin-confluence-backend';
+// conf plugin end
 
 export default async function createPlugin(
   env: PluginEnvironment,
@@ -48,6 +51,22 @@ export default async function createPlugin(
       tokenManager: env.tokenManager,
     }),
   });
+
+  // conf plugin start
+  // const halfHourSchedule = env.scheduler.createScheduledTaskRunner({
+  //   frequency: Duration.fromObject({ minutes: 30 }),
+  //   timeout: Duration.fromObject({ minutes: 15 }),
+  //   // A 3 second delay gives the backend server a chance to initialize before
+  //   // any collators are executed, which may attempt requests against the API.
+  //   initialDelay: Duration.fromObject({ seconds: 3 }),
+  // });
+  indexBuilder.addCollator({
+    schedule: schedule,
+    factory: ConfluenceCollatorFactory.fromConfig(env.config, {
+      logger: env.logger,
+    }),
+  });
+  // conf plugin end
 
   // The scheduler controls when documents are gathered from collators and sent
   // to the search engine for indexing.

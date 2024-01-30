@@ -37,6 +37,7 @@
     "@backstage/plugin-search-backend-node": "^1.2.12",
     "@backstage/plugin-techdocs-backend": "^1.9.1",
     "@immobiliarelabs/backstage-plugin-gitlab-backend": "^6.4.0",
+    "@k-phoen/backstage-plugin-confluence-backend": "^0.0.14",
     "app": "link:../app",
     "better-sqlite3": "^9.0.0",
     "dockerode": "^3.3.1",

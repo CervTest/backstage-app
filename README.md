@@ -91,3 +91,37 @@ Installing via instructions from https://github.com/RoadieHQ/roadie-backstage-pl
 * `yarn tsc`
 * `yarn dev`
 * Look at the test entity
+
+
+## Confluence Plugin
+
+This is 2 separate plugins, one for app and the other for backend.
+
+References are made to the files in this repository for adding code, instead of documentation, as the documentation may be out of date for newer versions of Backstage, and tend to assume a level of expertise with Node and how the backend operates.
+
+### app
+
+https://github.com/K-Phoen/backstage-plugin-confluence/tree/main/plugins/search-confluence
+
+Add plugin to the front end:
+
+`cd packages/app && yarn add @k-phoen/backstage-plugin-confluence`
+
+See the file packages/app/src/components/search/SearchPage.tsx and search for code inserted between `conf plugin start/end` comments to see where code was added.
+
+### backend
+
+https://github.com/K-Phoen/backstage-plugin-confluence/tree/main/plugins/search-confluence-backend
+
+Add plugin to the backend:
+
+`cd packages/backend && yarn add @k-phoen/backstage-plugin-confluence-backend`
+
+See the files app-config.yaml and packages/backend/src/plugins/search.ts and search for code inserted between `conf plugin start/end` comments to see where code was added.
+
+For API testing you can use:
+
+* Cloud: `curl -u <email>:<unencoded PAT> https://venuesh.atlassian.net/wiki/rest/api/content/`
+* DC: `curl -H "Authorization: Bearer <unencoded PAT>" https://i.adaptavist.com/rest/api/space/DH`
+
+However, unlike the Jira plugin's use of proxy config Confluence defines an integration which may not include the freedom to supply custom headers to vary between Cloud and DC :-(

@@ -85,3 +85,32 @@ catalog:
   locations:
     - type: url
       target: https://gitlab.adaptavist.net/backstage/clients/draper/applications/devops-portal-applications/-/blob/main/jira-template.yml
+
+    # Local example template
+    - type: file
+      target: ../../examples/template/template.yaml
+
+    # Local example organizational data
+    - type: file
+      target: ../../examples/org.yaml
+
+    # Dummy catalog file to readily edit locally
+    - type: file
+      target: ../../catalog-info.yaml
+
+confluence:
+  # Confluence base URL for wiki API
+  # Typically: https://{org-name}.atlassian.net/wiki
+  wikiUrl: https://venuesh.atlassian.net/wiki/ # Cloud
+  #wikiUrl: https://i.adaptavist.com # DC
+
+  # List of spaces to index
+  # See https://confluence.atlassian.com/conf59/spaces-792498593.html
+  spaces: [Venuesh] # Cloud
+  #spaces: [DH] # DC
+  # Authentication credentials towards Confluence API
+  auth:
+    username: ${CONFLUENCE_USERNAME}
+    # While Confluence supports BASIC authentication, using an API token is preferred.
+    # See: https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/
+    password: ${CONFLUENCE_PASSWORD}

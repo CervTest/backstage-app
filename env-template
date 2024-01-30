@@ -40,3 +40,7 @@ JIRA_TOKEN='Basic abc'
 
 # Debugging log level (set to `debug` to enable verbose debugging output)
 LOG_LEVEL=
+
+# Confluence plugin - for a cloud site use your email and a PAT (no encoding)
+CONFLUENCE_USERNAME=
+CONFLUENCE_PASSWORD=
