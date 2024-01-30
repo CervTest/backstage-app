@@ -6,6 +6,8 @@ metadata:
   # Example for optional annotations
   annotations:
     gitlab.com/project-slug: "backstage/clients/draper/dev-ops-portal"
+    jira/project-key: VSH # Cloud
+    #jira/project-key: DRAP # DC
 spec:
   type: website
   owner: john@example.com

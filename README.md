@@ -69,3 +69,25 @@ The following configuration files were edited or created:
 ##### The New Backend System
 
 Not currently in use.
+
+
+### Jira
+
+Installing via instructions from https://github.com/RoadieHQ/roadie-backstage-plugins/tree/main/plugins/frontend/backstage-plugin-jira
+
+* Run `yarn add @roadiehq/backstage-plugin-jira` from the `packages/app` directory
+* Fashion a working auth request which can vary between Jira Cloud and DC. You need to start with a PAT from whichever user account will be involved in auth
+  * IF CLOUD: Base64 encode `<email>:<PAT>` then wrap it like so: `'Basic <encoded token>'`
+  * IF DC: Do _not_ Base64 encode and solely use your PAT with a Bearer format instead: `Bearer <PAT>"`
+  * You can validate your API access using `curl` with something like the following, replacing `<AUTH>` with what you just prepared: `curl -X GET -H "Authorization: <AUTH>" -H "Content-Type: application/json" "https://venuesh.atlassian.net/rest/api/2/search?jql=project=VSH"` (or `https://tracker.adaptavist.com/rest/api/2/search?jql=project=DRAP` for a DC test)
+* Adjust config with proxy details for Jira (store `JIRA_TOKEN=<encoded token>|<PAT>` depending on Cloud or DC)
+  * IF CLOUD: `"Basic ${JIRA_TOKEN}"`
+  * IF DC: `"Bearer ${JIRA_TOKEN}"`
+  * The `jira` config block can be skipped if default proxy details are good enough
+* Add your JIRA url as a CSP entry as per instructions
+* Add a widget into `EntityPage.tsx`
+* Add an annotation to a test entity like: `jira/project-key: VSH` 
+* `yarn install`
+* `yarn tsc`
+* `yarn dev`
+* Look at the test entity

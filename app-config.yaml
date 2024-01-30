@@ -19,6 +19,13 @@ backend:
     # host: 127.0.0.1
   csp:
     connect-src: ["'self'", 'http:', 'https:']
+    img-src: 
+      # "'self'" and 'data' are from the backstage default but must be set since img-src is overriden
+      - "'self'"
+      - 'data:'
+      # Allow your Jira instance for @roadiehq/backstage-plugin-jira
+      - 'https://venuesh.atlassian.net' #Cloud
+      #- 'https://tracker.adaptavist.com' #DC      
     # Content-Security-Policy directives follow the Helmet format: https://helmetjs.github.io/#reference
     # Default Helmet Content-Security-Policy values can be removed by setting the key to false
   cors:
@@ -41,12 +48,17 @@ backend:
 
 
 proxy:
-  ### Example for how to add a proxy endpoint for the frontend.
-  ### A typical reason to do this is to handle HTTPS and CORS for internal services.
-  # endpoints:
-  #   '/test':
-  #     target: 'https://example.com'
-  #     changeOrigin: true
+  '/jira/api':
+    target: https://venuesh.atlassian.net # Cloud
+    #target: https://tracker.adaptavist.com # DC
+    headers:
+      Authorization: "Basic ${JIRA_TOKEN}" # Cloud
+      #Authorization: "Bearer ${JIRA_TOKEN}" # DC
+      Accept: 'application/json'
+      Content-Type: 'application/json'
+      X-Atlassian-Token: 'no-check'
+      # This is a workaround since Jira APIs reject browser origin requests. Any dummy string without whitespace works.
+      User-Agent: "Backstage"
 
 # Reference documentation http://backstage.io/docs/features/techdocs/configuration
 # Note: After experimenting with basic setup, use CI/CD to generate docs
