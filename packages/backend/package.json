@@ -36,6 +36,8 @@
     "@backstage/plugin-search-backend-module-techdocs": "^0.1.12",
     "@backstage/plugin-search-backend-node": "^1.2.12",
     "@backstage/plugin-techdocs-backend": "^1.9.1",
+    "@janus-idp/backstage-plugin-keycloak-backend": "^1.8.5",
+    "@redhat/backstage-plugin-keycloak-backend": "^1.5.3-redhat-00001-b489e34a",
     "app": "link:../app",
     "better-sqlite3": "^9.0.0",
     "dockerode": "^3.3.1",

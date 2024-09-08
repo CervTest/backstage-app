@@ -58,6 +58,41 @@ import {
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
 
+import { EntityGithubPullRequestsContent } from '@roadiehq/backstage-plugin-github-pull-requests';
+import { EntityGithubPullRequestsOverviewCard } from '@roadiehq/backstage-plugin-github-pull-requests';
+
+import {
+  EntityGithubCodespacesWidget,
+  EntityGithubCodespacesCard,
+  EntityGithubCodespacesContent,
+  EntityGithubCodespacesRepoContent,
+  isGithubCodespacesAvailable
+} from '@adityasinghal26/plugin-github-codespaces';
+
+// Create the codespaces tab content for Github Codespaces
+const codespacesContent = (
+  <>
+    {/* Add this entity switch to view the list 
+    of codespaces filtered with entity name */}
+    <EntitySwitch>
+      <EntitySwitch.Case if={isGithubCodespacesAvailable}>
+        <Grid item xs={12}>
+          <EntityGithubCodespacesContent />
+        </Grid>
+      </EntitySwitch.Case>
+    </EntitySwitch>
+    {/* Add this entity switch to view the list 
+    of codespaces filtered with repository */}
+    <EntitySwitch>
+      <EntitySwitch.Case if={isGithubCodespacesAvailable}>
+        <Grid item xs={12}>
+          <EntityGithubCodespacesRepoContent />
+        </Grid>
+      </EntitySwitch.Case>
+    </EntitySwitch>
+  </>
+);
+
 const techdocsContent = (
   <EntityTechdocsContent>
     <TechDocsAddons>
@@ -131,12 +166,34 @@ const overviewContent = (
       <EntityCatalogGraphCard variant="gridItem" height={400} />
     </Grid>
 
+    <Grid item md={6}>
+        <EntityGithubPullRequestsOverviewCard />
+    </Grid>
+
     <Grid item md={4} xs={12}>
       <EntityLinksCard />
     </Grid>
     <Grid item md={8} xs={12}>
       <EntityHasSubcomponentsCard variant="gridItem" />
     </Grid>
+      {/* Add this entity switch to add the Start Codespace widget  */}
+      <EntitySwitch>
+        <EntitySwitch.Case if={e => Boolean(isGithubCodespacesAvailable(e))}>
+          <Grid item md={6} xs={12}>
+            <EntityGithubCodespacesWidget />
+          </Grid>
+        </EntitySwitch.Case>
+      </EntitySwitch>
+      {/* Add this entity switch to add the Start and List Codespace card.
+      You can set enableStart as 'true' to show the Start Codespace button.
+      If left unset or set as 'false', the Start Codespace button will be unavailable.   */}
+      <EntitySwitch>
+        <EntitySwitch.Case if={e => Boolean(isGithubCodespacesAvailable(e))}>
+          <Grid item md={6} xs={12}>
+            <EntityGithubCodespacesCard />
+          </Grid>
+        </EntitySwitch.Case>
+      </EntitySwitch>
   </Grid>
 );
 
@@ -148,6 +205,10 @@ const serviceEntityPage = (
 
     <EntityLayout.Route path="/ci-cd" title="CI/CD">
       {cicdContent}
+    </EntityLayout.Route>
+
+    <EntityLayout.Route path="/pull-requests" title="Pull Requests">
+      <EntityGithubPullRequestsContent />
     </EntityLayout.Route>
 
     <EntityLayout.Route path="/api" title="API">
@@ -174,6 +235,13 @@ const serviceEntityPage = (
 
     <EntityLayout.Route path="/docs" title="Docs">
       {techdocsContent}
+    </EntityLayout.Route>
+
+    <EntityLayout.Route 
+        if={isGithubCodespacesAvailable} 
+        path="/github-codespaces" 
+        title="GitHub Codespaces">
+      {codespacesContent}
     </EntityLayout.Route>
   </EntityLayout>
 );

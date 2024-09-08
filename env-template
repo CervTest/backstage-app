@@ -37,3 +37,8 @@ SEGMENT_WRITE_KEY=
 
 # Debugging log level (set to `debug` to enable verbose debugging output)
 LOG_LEVEL=
+
+KEYCLOAK_URL=
+KEYCLOAK_REALM=
+KEYCLOAK_CLIENTID=
+KEYCLOAK_CLIENTSECRET=
