@@ -98,3 +98,6 @@ catalog:
     # Dummy catalog file to readily edit locally
     - type: file
       target: ../../catalog-info.yaml
+
+spotify:
+  licenseKey: ${SPOTIFY_LICENSE}

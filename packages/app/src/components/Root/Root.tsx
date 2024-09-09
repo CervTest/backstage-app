@@ -55,6 +55,8 @@ const SidebarLogo = () => {
   );
 };
 
+import SchoolIcon from '@material-ui/icons/School';
+
 export const Root = ({ children }: PropsWithChildren<{}>) => (
   <SidebarPage>
     <Sidebar>
@@ -73,6 +75,7 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         <SidebarDivider />
         <SidebarScrollWrapper>
           <SidebarItem icon={MapIcon} to="tech-radar" text="Tech Radar" />
+          <SidebarItem icon={SchoolIcon} to="skill-exchange" text="Skill Exchange" />
         </SidebarScrollWrapper>
       </SidebarGroup>
       <SidebarSpace />

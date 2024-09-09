@@ -52,3 +52,28 @@ Then what we hope to add:
 * Look for options for how we can group some Hack entities together in a Hackday event
 * Possibly add custom functionality to achieve the above and/or go further like adding a voting system
 * Prep a presentation for what got done!
+
+#### Steps taken
+
+A running tally of what's been done
+
+* Confirmed deployments still work and set the `skillexchange` branch to be active
+* Updated the Spotify license secret
+* `yarn workspace backend add @spotify/backstage-plugin-skill-exchange-backend`
+* Added `packages/backend/src/plugins/skillexchange.ts` with content from install instructions
+* Added lines to `packages/backend/src/index.ts` as per docs
+* Added lines to `packages/backend/src/search.ts` as per docs
+* `yarn workspace app add @spotify/backstage-plugin-skill-exchange`
+* Added to `packages/app/src/App.tsx`
+* Added to `packages/app/src/components/Root/Root.tsx`
+* Added to `packages/app/src/components/catalog/EntityPage.tsx`
+* Added the Spotify license block to app-config.yaml (having a SPOTIFY_LICENSE env var available):
+
+```
+spotify:
+  licenseKey: ${SPOTIFY_LICENSE}
+```
+
+So far so good! The above made UI elements visible in the app, and with the license key set right also avoided a banner about not being licensed. Nothing API-related worked though, so probably can't skip by https://backstage.io/docs/auth/service-to-service-auth--old ! (note: still using old backend)
+
+* Adjust `packages/backend/src/index.ts` to enable the validation token thing - was not enough on its own, change reverted for the moment. Possible the old version of Backstage vs newer SkillExchange plugin code, and/or the new vs old backstage and related instructions?

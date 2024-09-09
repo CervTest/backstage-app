@@ -273,6 +273,8 @@ const apiPage = (
   </EntityLayout>
 );
 
+import { SkillExchangeUserEntitySkillsCard } from '@spotify/backstage-plugin-skill-exchange';
+
 const userPage = (
   <EntityLayout>
     <EntityLayout.Route path="/" title="Overview">
@@ -283,6 +285,9 @@ const userPage = (
         </Grid>
         <Grid item xs={12} md={6}>
           <EntityOwnershipCard variant="gridItem" />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <SkillExchangeUserEntitySkillsCard />
         </Grid>
       </Grid>
     </EntityLayout.Route>

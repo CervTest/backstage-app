@@ -55,6 +55,8 @@ const app = createApp({
   },
 });
 
+import { SkillExchangePage } from '@spotify/backstage-plugin-skill-exchange';
+
 const routes = (
   <FlatRoutes>
     <Route path="/" element={<Navigate to="catalog" />} />
@@ -93,6 +95,11 @@ const routes = (
     </Route>
     <Route path="/settings" element={<UserSettingsPage />} />
     <Route path="/catalog-graph" element={<CatalogGraphPage />} />
+
+    <Route
+      path="/skill-exchange"
+      element={<SkillExchangePage enableEmbeds enableHacks enableMentorships />}
+    />
   </FlatRoutes>
 );
 

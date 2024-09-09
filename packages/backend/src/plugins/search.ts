@@ -9,6 +9,8 @@ import { DefaultCatalogCollatorFactory } from '@backstage/plugin-search-backend-
 import { DefaultTechDocsCollatorFactory } from '@backstage/plugin-search-backend-module-techdocs';
 import { Router } from 'express';
 
+import { SkillProfileDecoratorFactory } from '@spotify/backstage-plugin-skill-exchange-backend';
+
 export default async function createPlugin(
   env: PluginEnvironment,
 ): Promise<Router> {
@@ -19,6 +21,15 @@ export default async function createPlugin(
   const indexBuilder = new IndexBuilder({
     logger: env.logger,
     searchEngine,
+  });
+
+  indexBuilder.addDecorator({
+    factory: SkillProfileDecoratorFactory.fromConfig(env.config, {
+      cache: env.cache,
+      discovery: env.discovery,
+      logger: env.logger,
+      tokenManager: env.tokenManager,
+    }),
   });
 
   const schedule = env.scheduler.createScheduledTaskRunner({
