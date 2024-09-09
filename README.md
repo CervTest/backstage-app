@@ -30,3 +30,25 @@ While working locally with this approach it is important to keep your config fil
 To validate your plugin after following the instructions run `yarn install` then `yarn tsc` and consider adjusting the locally included `catalog-info.yaml` with an appropriate annotation to test. You might also want to minimize extra tweaks to whitespace and the like to leave a clearer overview and make it easier to merge plugin branches around without causing excessive conflicts (make such edits in the relevant base branch instead)
 
 For managing secrets on the GitHub/Jenkins/GCP setup make the associated credential in Jenkins and then reference it in the `backstage-infra` repo. In there the `Jenkinsfile` will load the credential, write it into a Kubernetes secrets file locally, which is then deployed to k8s and loaded by Backstage as extra environment variables you can then simply reach normally in config. Note that there is also an additional extra override config file in the infra repo, much like the local config file when working in a developer workspace.
+
+### SkillExchange
+
+This plugin from Spotify's premium plugin bundle enables a series of skill-oriented functionality in Backstage. See its [documentation page](https://backstage.spotify.com/docs/plugins/skill-exchange/) and [install page](https://backstage.spotify.com/docs/plugins/skill-exchange/setup-and-installation) for details.
+
+Some needed steps from the docs:
+
+* (actually get Backstage running from source with basic GitHub integration/auth)
+* Make sure backend auth works
+* Make sure we have user entities (ideally via the GitHub auth sign-in resolver)
+* Slack integration? This may be optional and something we could defer. Rasmus has a Slack instance that could be used if needed (it may take a bit to get integrated into the live Adaptavist Slack)
+* Install the Backend plugin (avoid the new backend system if using the GitHub setup - it sits on an older Backstage version still)
+* Come up with some skill lists - public demo data should be available or we could dream some up! Can be silly, Rasmus might bring his newborn's skills in for visualizing ...
+* Something about a Hack Digest notification on Slack - this sounds relevant to our interests but we should probably get other stuff working first and examine what Hacks cover
+* Install the Frontend plugin
+
+Then what we hope to add:
+
+* Add some Hack entries that match real live Hackathon entries from the 2024 Adaptavist Hackday!
+* Look for options for how we can group some Hack entities together in a Hackday event
+* Possibly add custom functionality to achieve the above and/or go further like adding a voting system
+* Prep a presentation for what got done!
