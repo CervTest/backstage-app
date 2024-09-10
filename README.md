@@ -76,4 +76,15 @@ spotify:
 
 So far so good! The above made UI elements visible in the app, and with the license key set right also avoided a banner about not being licensed. Nothing API-related worked though, so probably can't skip by https://backstage.io/docs/auth/service-to-service-auth--old ! (note: still using old backend)
 
-* Adjust `packages/backend/src/index.ts` to enable the validation token thing - was not enough on its own, change reverted for the moment. Possible the old version of Backstage vs newer SkillExchange plugin code, and/or the new vs old backstage and related instructions?
+* Adjust `packages/backend/src/index.ts` to enable the validation token thing
+* Add the backend secret (env var) and use it in `app-config.yaml`
+
+Oddly while the SkillExchange docs pointed to the old backend option for the _token_ handling it did not link to https://github.com/backstage/backstage/blob/master/contrib/docs/tutorials/authenticate-api-requests.md which talks about API auth itself. That changes majorly with 1.26 but as of this writing this repo uses 1.21 so lets give it a try!
+
+* Create `packages/backend/src/authMiddleware.ts`
+* `yarn --cwd packages/backend add cookie-parser`
+* Update `packages/backend/src/index.ts` further with some cookie auth thing
+* ~~Create `packages/app/src/cookieAuth.ts`~~ - actually, this ended up just embedding a slightly different version from https://gitlab.adaptavist.net/backstage/clients/adaptavist/idp-app/-/blob/main/packages/app/src/App.tsx#L63-108
+* Adjust `packages/app/src/App.tsx` (also added in the use of GitHub on the login page here - guest may not work right with auth set up this way)
+
+This became a bit more fletchy between other Backstage instances but hopefully the commit contains it decently. A way to map the logged in user from GitHub to a user entity in Backstage would still be needed to be fully proper.

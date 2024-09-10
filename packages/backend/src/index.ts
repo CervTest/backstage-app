@@ -34,13 +34,15 @@ import { DefaultIdentityClient } from '@backstage/plugin-auth-node';
 
 import skillexchange from './plugins/skillexchange';
 
-function makeCreateEnv(config: Config) {
+import { createAuthMiddleware } from './authMiddleware';
+import cookieParser from 'cookie-parser';
+
+function makeCreateEnv(config: Config, tokenManager: ServerTokenManager) {
   const root = getRootLogger();
   const reader = UrlReaders.default({ logger: root, config });
   const discovery = HostDiscovery.fromConfig(config);
   const cacheManager = CacheManager.fromConfig(config);
   const databaseManager = DatabaseManager.fromConfig(config, { logger: root });
-  const tokenManager = ServerTokenManager.noop();
   const taskScheduler = TaskScheduler.fromConfig(config, { databaseManager });
 
   const identity = DefaultIdentityClient.create({
@@ -78,7 +80,10 @@ async function main() {
     argv: process.argv,
     logger: getRootLogger(),
   });
-  const createEnv = makeCreateEnv(config);
+  const tokenManager = ServerTokenManager.fromConfig(config, {
+    logger: getRootLogger(),
+  });
+  const createEnv = makeCreateEnv(config, tokenManager);
 
   const catalogEnv = useHotMemoize(module, () => createEnv('catalog'));
   const scaffolderEnv = useHotMemoize(module, () => createEnv('scaffolder'));
@@ -88,20 +93,31 @@ async function main() {
   const searchEnv = useHotMemoize(module, () => createEnv('search'));
   const appEnv = useHotMemoize(module, () => createEnv('app'));
 
-  const skillexchangeEnv = createEnv('skillEx');
+  const skillexchangeEnv = useHotMemoize(module, () => createEnv('skillEx'));
+  // const skillexchangeEnv = createEnv('skillEx');
+
+  const authMiddleware = await createAuthMiddleware(config, appEnv);
 
   const apiRouter = Router();
-  apiRouter.use('/catalog', await catalog(catalogEnv));
-  apiRouter.use('/scaffolder', await scaffolder(scaffolderEnv));
+
+  apiRouter.use(cookieParser());
+  // The auth route must be publicly available as it is used during login
   apiRouter.use('/auth', await auth(authEnv));
-  apiRouter.use('/techdocs', await techdocs(techdocsEnv));
-  apiRouter.use('/proxy', await proxy(proxyEnv));
+  // Add a simple endpoint to be used when setting a token cookie
+  apiRouter.use('/cookie', authMiddleware, (_req, res) => {
+    res.status(200).send(`Coming right up`);
+  });
+
+  apiRouter.use('/catalog', authMiddleware, await catalog(catalogEnv));
+  apiRouter.use('/scaffolder', authMiddleware, await scaffolder(scaffolderEnv));
+  apiRouter.use('/techdocs', authMiddleware, await techdocs(techdocsEnv));
+  apiRouter.use('/proxy', authMiddleware, await proxy(proxyEnv));
   apiRouter.use('/search', await search(searchEnv));
 
-  apiRouter.use('/skill-exchange', await skillexchange(skillexchangeEnv));
+  apiRouter.use('/skill-exchange', authMiddleware, await skillexchange(skillexchangeEnv));
 
   // Add backends ABOVE this line; this 404 handler is the catch-all fallback
-  apiRouter.use(notFoundHandler());
+  apiRouter.use(authMiddleware, notFoundHandler());
 
   const service = createServiceBuilder(module)
     .loadConfig(config)
