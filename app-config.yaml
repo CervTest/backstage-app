@@ -99,3 +99,22 @@ catalog:
     # Dummy catalog file to readily edit locally
     - type: file
       target: ../../catalog-info.yaml
+
+soundcheck:
+  programs:
+    $include: ./soundcheck/soundcheck-tracks.yaml
+  checks:
+    #$include: ./soundcheck/soundcheck-checks.yaml
+    - id: has-readme
+      rule:
+        factRef: scm:default/readme
+        path: $.exists
+        operator: equal
+        value: true
+      passedMessage: |
+        README.md was found at repository root, check passed.
+      failedMessage: |
+        README.md was not found at repository root, check failed.
+
+spotify:
+  licenseKey: ${SPOTIFY_LICENSE}
