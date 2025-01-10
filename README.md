@@ -2,6 +2,27 @@
 
 To run locally you need a Node version 18 or 20 available with `yarn` installed. Typically you'd use a utility like `nvm` or `nodenv` to install Node, set that version active, then use NPM to install `yarn`
 
+## Installing Node & Yarn
+
+There are multiple Node environment managers example, see for instance https://www.honeybadger.io/blog/node-environment-managers/
+
+Here is an example with FNM which is nice cross-platform (requires `brew` installed on a Mac)
+
+* `curl -fsSL https://fnm.vercel.app/install | bash`
+* `fnm list-remote` to show available Node versions
+* `fnm install v20.18.1` to install a specific one
+* Edit your shell profile such as `~/.zshrc` and adjust it if needed - see below for an example with a Brew-installed FNM
+* Make `yarn` available: `corepack enable`
+* Check both from within this project directory: `node --version` & `yarn --version` (which may trigger the actual download of `yarn`)
+
+```shell
+# fnm
+export PATH="/opt/homebrew/bin/fnm:$PATH"
+eval "`fnm env --use-on-cd --shell zsh`"
+```
+
+## Running Backstage
+
 To start the app, run:
 
 ```sh

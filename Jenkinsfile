@@ -6,10 +6,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'yarn install --network-timeout 900000' // TODO: Too long! Maybe mix of needing a local cache and an SSD capable agent?
-                sh 'yarn tsc'
-                sh 'yarn build:backend'
-                sh 'yarn build-image'
+                container('node') {
+                    sh 'yarn install --network-timeout 900000' // TODO: Too long! Maybe mix of needing a local cache and an SSD capable agent?
+                    sh 'yarn tsc'
+                    sh 'yarn build:backend'
+                    sh 'yarn build-image'
+                }
             }
         }
 
